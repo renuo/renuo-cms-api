@@ -8,6 +8,8 @@ gem 'rails-i18n'
 gem 'devise'
 gem 'rack-google-analytics'
 gem 'devise-i18n'
+gem 'coffee-rails'
+gem 'sass-rails'
 
 group :development do
   gem 'better_errors'
