@@ -1,0 +1,18 @@
+postgres: &postgres
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: ""
+
+development:
+  <<: *postgres
+  database: renuo-cms-api_development
+
+test:
+  <<: *postgres
+  database: renuo-cms-api_test
+
+production:
+  <<: *postgres
+  database: renuo-cms-api_production

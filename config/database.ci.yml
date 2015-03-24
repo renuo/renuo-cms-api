@@ -1,0 +1,8 @@
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: renuo-cms-api_test
+  pool: 5
+  username: gitlab_ci_runner
+  password: secret
+  host: localhost

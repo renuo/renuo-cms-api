@@ -1,0 +1,23 @@
+MAIL_USERNAME: ''
+MAIL_PASSWORD: ''
+MAIL_SENDER: '<yourname>+renuo-cms-api@renuo.ch'
+APP_HOST: 'renuo-cms-api.dev'
+APP_PORT: '3000'
+
+SECRET_KEY_BASE: 'rake secret'
+DEVISE_SECRET_KEY: 'rake secret'
+DEVISE_PEPPER: 'rake secret'
+
+NEW_RELIC_LICENSE_KEY: 'TODO'
+NEW_RELIC_APP_NAME: 'renuo-cms-api-<branch>'
+
+SENTRY_DSN: ''
+
+S3_BUCKET_NAME: 'renuo-cms-api-<branch>'
+AWS_ACCESS_KEY_ID: ''
+AWS_SECRET_ACCESS_KEY: ''
+
+ADMIN_EMAIL: '<yourname>+renuo-cms-api@renuo.ch'
+ADMIN_PASSWORD: 'developer'
+
+GOOGLE_ANALYTICS_ID: ''
