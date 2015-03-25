@@ -10,6 +10,9 @@ gem 'rack-google-analytics'
 gem 'devise-i18n'
 gem 'coffee-rails'
 gem 'sass-rails'
+gem 'slim-rails'
+gem 'paperclip'
+gem 'uglifier'
 
 group :development do
   gem 'better_errors'

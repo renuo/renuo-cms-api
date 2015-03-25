@@ -19,5 +19,3 @@ AWS_SECRET_ACCESS_KEY: ''
 
 ADMIN_EMAIL: '<yourname>+renuo-cms-api@renuo.ch'
 ADMIN_PASSWORD: 'developer'
-
-GOOGLE_ANALYTICS_ID: ''
