@@ -96,6 +96,9 @@ GEM
       activesupport (>= 4.1.0)
     hike (1.2.3)
     i18n (0.7.0)
+    jbuilder (2.2.12)
+      activesupport (>= 3.0.0, < 5)
+      multi_json (~> 1.2)
     json (1.8.2)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -248,6 +251,7 @@ DEPENDENCIES
   devise-i18n
   factory_girl_rails
   figaro
+  jbuilder
   letter_opener
   newrelic_rpm
   paperclip

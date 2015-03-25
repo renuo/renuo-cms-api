@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   get 'home/check'
 
   resources :content_blocks
+  root 'content_blocks#index'
 end

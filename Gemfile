@@ -13,6 +13,7 @@ gem 'sass-rails'
 gem 'slim-rails'
 gem 'paperclip'
 gem 'uglifier'
+gem 'jbuilder'
 
 group :development do
   gem 'better_errors'
