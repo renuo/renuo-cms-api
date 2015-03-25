@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Contnet path:
+  = @content_block.contnet_path
+p
+  strong Content:
+  = @content_block.content
+
+= link_to 'Edit', edit_content_block_path(@content_block)
+'|
+= link_to 'Back', content_blocks_path
