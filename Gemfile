@@ -23,6 +23,7 @@ end
 group :development, :test do
   gem 'rubocop'
   gem 'byebug'
+  gem 'quiet_assets'
 end
 
 group :test do
