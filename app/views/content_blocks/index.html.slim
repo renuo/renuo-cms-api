@@ -3,7 +3,7 @@ h1 Listing content_blocks
 table
   thead
     tr
-      th Contnet path
+      th Content path
       th Content
       th
       th
@@ -12,11 +12,11 @@ table
   tbody
     - @content_blocks.each do |content_block|
       tr
-        td = content_block.contnet_path
+        td = content_block.content_path
         td = content_block.content
         td = link_to 'Show', content_block
         td = link_to 'Edit', edit_content_block_path(content_block)
-        td = link_to 'Destroy', content_block, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Destroy', content_block, data: { content: 'Are you sure?' }, method: :delete
 
 br
 

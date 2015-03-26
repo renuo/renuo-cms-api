@@ -3,9 +3,17 @@ class ContentBlocksController < ApplicationController
 
   def index
     @content_blocks = ContentBlock.all
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   def new
@@ -45,6 +53,6 @@ class ContentBlocksController < ApplicationController
   end
 
   def content_block_params
-    params.require(:content_block).permit(:contnet_path, :content)
+    params.require(:content_block).permit(:content_path, :content)
   end
 end
