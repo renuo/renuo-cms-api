@@ -14,6 +14,7 @@ gem 'devise-i18n'
 gem 'paperclip'
 gem 'uglifier'
 gem 'jbuilder'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :development do
   gem 'better_errors'

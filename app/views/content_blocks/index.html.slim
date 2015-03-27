@@ -16,7 +16,7 @@ table
         td = content_block.content
         td = link_to 'Show', content_block
         td = link_to 'Edit', edit_content_block_path(content_block)
-        td = link_to 'Destroy', content_block, data: { content: 'Are you sure?' }, method: :delete
+        td = button_to 'Destroy', content_block, method: :delete, data: { confirm: 'Are you sure?' }
 
 br
 

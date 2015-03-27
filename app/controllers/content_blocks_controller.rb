@@ -1,19 +1,14 @@
 class ContentBlocksController < ApplicationController
   before_action :set_content_block, only: [:show, :edit, :update, :destroy]
+  skip_before_filter :verify_authenticity_token
+
+  respond_to :html, :json
 
   def index
     @content_blocks = ContentBlock.all
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
 
   def show
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
 
   def new
@@ -26,10 +21,14 @@ class ContentBlocksController < ApplicationController
   def create
     @content_block = ContentBlock.new(content_block_params)
 
-    if @content_block.save
-      redirect_to @content_block, notice: 'Content block was successfully created.'
-    else
-      render :new
+    respond_to do |format|
+      if @content_block.save
+        format.html { redirect_to @content_block, notice: 'Content block was successfully created.' }
+        format.json { render json: @content_block, status: :created, location: @content_block }
+      else
+        format.html { render :new }
+        format.json { render json: @content_block.errors, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -43,7 +42,9 @@ class ContentBlocksController < ApplicationController
 
   def destroy
     @content_block.destroy
-    redirect_to content_blocks_url, notice: 'Content block was successfully destroyed.'
+    respond_to do |format|
+      format.html { redirect_to content_blocks_url, notice: 'Content block was successfully destroyed.' }
+    end
   end
 
   private
