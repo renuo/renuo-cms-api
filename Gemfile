@@ -26,6 +26,7 @@ group :development, :test do
   gem 'rubocop'
   gem 'byebug'
   gem 'quiet_assets'
+  gem 'faker'
 end
 
 group :test do
@@ -33,6 +34,7 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'simplecov'
 end
 
 group :production do
