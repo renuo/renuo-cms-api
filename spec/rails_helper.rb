@@ -10,7 +10,6 @@ Capybara.javascript_driver = :webkit
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-
   config.use_transactional_fixtures = false
 
   config.before(:suite) do
