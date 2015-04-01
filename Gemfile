@@ -4,17 +4,13 @@ ruby '2.2.0'
 gem 'rails', '4.2.0'
 gem 'pg'
 
-gem 'coffee-rails'
-gem 'sass-rails'
-gem 'slim-rails'
 gem 'figaro'
 gem 'rails-i18n'
 gem 'devise'
 gem 'devise-i18n'
 gem 'paperclip'
 gem 'uglifier'
-gem 'jbuilder'
-gem 'rack-cors', :require => 'rack/cors'
+gem 'rack-cors', require: 'rack/cors'
 
 group :development do
   gem 'better_errors'
