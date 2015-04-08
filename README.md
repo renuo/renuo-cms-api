@@ -6,19 +6,28 @@ The soon-to-be central CMS of Renuo LLC. Is a work in progress.
 
 ### Master
 
+https://renuo-cms-api-master.herokuapp.com
+
+[![build status](https://ci.renuo.ch/projects/38/status.png?ref=master)](https://ci.renuo.ch/projects/38?ref=master)
 
 ### Develop
 
+https://renuo-cms-api-develop.herokuapp.com
+
+[![build status](https://ci.renuo.ch/projects/38/status.png?ref=develop)](https://ci.renuo.ch/projects/38?ref=develop)
 
 ### Testing
 
+https://renuo-cms-api-testing.herokuapp.com
+
+[![build status](https://ci.renuo.ch/projects/38/status.png?ref=testing)](https://ci.renuo.ch/projects/38?ref=testing)
 
 ## Ruby on Rails
 
 This application requires:
 
-- Ruby 2.2.0
-- Rails 4.2
+- Ruby 2.2.1
+- Rails 4.2.1
 
 ## Installation
 
@@ -64,7 +73,22 @@ rspec
 
 ### CI
 
+https://ci.renuo.ch/projects/38
 
+### Code Linting / Vulnerability Check
+
+Rubocop is used to lint the ruby code while Brakeman is used to check for security vulnerabilities.
+They are both run in a pre-commit git hook to insure code quality. If you need to make changes to
+the Rubocop configuration edit the .rubocop.yml file (configuration here: https://github.com/bbatsov/rubocop#configuration)
+
+If you want to add other tools to the pre-commit hook, edit the script at .git/hooks/pre-commit.
+
+If you want to run the tools manually, you can do so with the following two command:
+
+```sh
+rubocop
+brakeman
+```
 
 ## Run
 
