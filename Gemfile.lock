@@ -76,7 +76,6 @@ GEM
     diff-lcs (1.2.5)
     docile (1.1.5)
     erubis (2.7.0)
-    execjs (2.4.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.5.0)
@@ -208,9 +207,6 @@ GEM
     tilt (1.4.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.7.1)
-      execjs (>= 0.3.0)
-      json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
     xpath (2.0.0)
@@ -244,4 +240,3 @@ DEPENDENCIES
   rubocop
   sentry-raven
   simplecov
-  uglifier
