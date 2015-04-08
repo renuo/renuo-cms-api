@@ -36,11 +36,9 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
 
   describe 'PUT /api/content_blocks/:id' do
     it 'checks wether a record gets created when posting JSON' do
-      create_content_blocks
-      old_content = ContentBlock.first.content
-      post :update, format: :json, id: 1, content_block: { content: 'foo bar' }
-      expect(ContentBlock.find(1).content).to_not eq(old_content)
-      expect(ContentBlock.find(1).content).to eq('foo bar')
+      create(:content_block, content_path: 'foo/bar', content: 'foo bar')
+      post :update, format: :json, id: 1, content_block: { content: 'foo baz' }
+      expect(ContentBlock.first.content).to eq('foo baz')
     end
   end
 
