@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 def create_content_blocks
-  5.times do |number|
+  2.times do |number|
     create(:content_block, content_path: "path/#{number}")
   end
 end
@@ -48,7 +48,7 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
     it 'checks whether a record can be deleted' do
       create_content_blocks
       delete :destroy, format: :json, id: 1
-      expect(ContentBlock.count).to eq(4)
+      expect(ContentBlock.count).to eq(1)
       expect(ContentBlock.where(id: 1).empty?).to be_truthy
     end
   end
