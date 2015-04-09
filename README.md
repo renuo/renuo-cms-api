@@ -57,14 +57,6 @@ bundle exec rake db:drop db:setup
 
 ## Tests
 
-### Initialization
-
-Setup the database for the test environment:
-
-```sh
-RAILS_ENV=test rake db:drop db:create db:migrate
-```
-
 ### Run Tests
 
 ```sh
