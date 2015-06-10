@@ -1,7 +1,7 @@
 module Api
   class ContentBlocksController < ApplicationController
     before_action :set_content_block, only: [:show, :update, :destroy]
-    skip_before_filter :verify_authenticity_token
+    skip_before_action :verify_authenticity_token
     # TODO: Uncomment access token support and write tests for it.
     # before_filter :restrict_access
 

@@ -1,14 +1,12 @@
 source 'https://rubygems.org'
 ruby File.read('.ruby-version').strip
 
-gem 'rails', '4.2.1'
+gem 'rails'
 gem 'pg'
-
 gem 'figaro'
 gem 'rails-i18n'
 gem 'devise'
 gem 'devise-i18n'
-gem 'paperclip'
 gem 'rack-cors', require: 'rack/cors'
 
 group :development do
@@ -38,4 +36,5 @@ group :production do
   gem 'rails_12factor'
   gem 'sentry-raven'
   gem 'newrelic_rpm'
+  gem 'lograge'
 end
