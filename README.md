@@ -75,11 +75,10 @@ the Rubocop configuration edit the .rubocop.yml file (configuration here: https:
 
 If you want to add other tools to the pre-commit hook, edit the script at .git/hooks/pre-commit.
 
-If you want to run the tools manually, you can do so with the following two command:
+If you want to run the tools manually, you can do so with the following command:
 
 ```sh
-rubocop
-brakeman
+bin/check
 ```
 
 ## Run

@@ -3,7 +3,6 @@ ruby File.read('.ruby-version').strip
 
 gem 'rails'
 gem 'pg'
-
 gem 'figaro'
 gem 'rails-i18n'
 gem 'devise'
