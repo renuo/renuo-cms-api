@@ -2,8 +2,6 @@ module Api
   class ContentBlocksController < ApplicationController
     before_action :set_content_block, only: [:show, :update, :destroy]
     skip_before_action :verify_authenticity_token
-    # TODO: Uncomment access token support and write tests for it.
-    # before_filter :restrict_access
 
     respond_to :json
 
@@ -36,11 +34,5 @@ module Api
     def content_block_params
       params.require(:content_block).permit(:content_path, :content)
     end
-
-    # def restrict_access
-    #   authenticate_or_request_with_http_token do |token, options|
-    #     ApiKey.exists?(access_token: token)
-    #   end
-    # end
   end
 end
