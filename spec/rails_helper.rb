@@ -10,23 +10,13 @@ Capybara.javascript_driver = :webkit
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-  config.use_transactional_fixtures = false
-
   config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
   end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
-  config.after(:each) do
-    DatabaseCleaner.clean
-  end
-
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, type: :controller
+  config.include Capybara::DSL
 
   config.infer_spec_type_from_file_location!
-  config.include Capybara::DSL
 end

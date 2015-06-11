@@ -134,6 +134,7 @@ GEM
     rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack-timeout (0.2.4)
     rails (4.2.1)
       actionmailer (= 4.2.1)
       actionpack (= 4.2.1)
@@ -247,6 +248,7 @@ DEPENDENCIES
   puma
   quiet_assets
   rack-cors
+  rack-timeout
   rails
   rails-i18n
   rails_12factor
