@@ -9,8 +9,6 @@ APP_PORT: '3000'
 
 # Secrets
 SECRET_KEY_BASE: 'rake secret'
-DEVISE_SECRET_KEY: 'rake secret'
-DEVISE_PEPPER: 'rake secret'
 
 # Newrelic
 NEW_RELIC_LICENSE_KEY: 'TODO'

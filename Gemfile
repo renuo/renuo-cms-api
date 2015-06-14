@@ -5,10 +5,9 @@ gem 'rails'
 gem 'pg'
 gem 'figaro'
 gem 'rails-i18n'
-gem 'devise'
-gem 'devise-i18n'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-timeout'
+gem 'responders'
 
 group :development do
   gem 'better_errors'
