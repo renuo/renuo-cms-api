@@ -1,21 +1,23 @@
+# Create one new account mandrill+<application>@renuo.ch at https://mandrillapp.com/ for develop/master/testing
+# Document the credentials here: https://redmine.renuo.ch/projects/<application>/wiki
 MAIL_USERNAME: ''
 MAIL_PASSWORD: ''
 MAIL_SENDER: '<yourname>+renuo-cms-api@renuo.ch'
+# Use /etc/hosts to change the dns to 127.0.0.1
 APP_HOST: 'renuo-cms-api.dev'
 APP_PORT: '3000'
 
+# Secrets
 SECRET_KEY_BASE: 'rake secret'
-DEVISE_SECRET_KEY: 'rake secret'
-DEVISE_PEPPER: 'rake secret'
 
+# Newrelic
 NEW_RELIC_LICENSE_KEY: 'TODO'
 NEW_RELIC_APP_NAME: 'renuo-cms-api-<branch>'
 
+# Add 3 new projects for develop/master/testing at https://app.getsentry.com/organizations/renuo/projects/new/
 SENTRY_DSN: ''
 
-S3_BUCKET_NAME: 'renuo-cms-api-<branch>'
-AWS_ACCESS_KEY_ID: ''
-AWS_SECRET_ACCESS_KEY: ''
-
+# This is used to seed your database
+# Use a random password for develop/master/testing
 ADMIN_EMAIL: '<yourname>+renuo-cms-api@renuo.ch'
 ADMIN_PASSWORD: 'developer'
