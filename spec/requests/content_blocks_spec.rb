@@ -4,14 +4,15 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
   render_views
 
   let!(:content_block) { create(:content_block) }
-  let(:json) { JSON.parse(response.body) }
-  let(:default_api_params) do
+  let!(:default_api_params) do
     {
       format: :json,
       api_key: content_block.api_key,
       content_path: content_block.content_path
     }
   end
+
+  let(:json) { JSON.parse(response.body) }
 
   describe 'GET /api/content_blocks/:api_key/:content_path' do
     it 'checks whether the right JSON responds to a GET request to a show action' do
@@ -24,7 +25,6 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
     it 'checks wether a record gets created when posting JSON' do
       content_block_attributes = attributes_for(:content_block)
       expect do
-        #puts default_api_params.merge(content_block: content_block)
         post :create, default_api_params.merge(content_block: content_block_attributes)
       end.to change { ContentBlock.count }.by(1)
     end
