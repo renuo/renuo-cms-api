@@ -28,7 +28,10 @@ module Api
     end
 
     def content_block_params
-      params.require(:content_block).permit(:content_path, :content)
+      unless params[:content_block][:api_key].present?
+        raise(ActionController::ParameterMissing.new(:api_key))
+      end
+      params.require(:content_block).permit(:api_key, :content_path, :content)
     end
   end
 end

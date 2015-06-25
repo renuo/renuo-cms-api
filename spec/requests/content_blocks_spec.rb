@@ -14,28 +14,27 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
 
   describe 'POST /api/content_blocks' do
     it 'checks wether a record gets created when posting JSON' do
-      content_block = build(:content_block)
+      content_block = attributes_for(:content_block)
       expect do
-        post :create, format: :json,
-                      content_block: {
-                        content_path: content_block.content_path,
-                        content: content_block.content
-                      }
+        post :create, format: :json, content_block: content_block
       end.to change { ContentBlock.count }.by(1)
     end
   end
 
   describe 'PUT /api/content_blocks/:id' do
     it 'checks wether a record gets created when posting JSON' do
-      new_content = 'foo baz'
-      post :update, format: :json, id: content_block.id, content_block: { content: new_content }
-      expect(ContentBlock.first.content).to eq(new_content)
+      new_content_block = {
+        api_key: content_block.api_key,
+        content: 'foo baz'
+      }
+      post :update, format: :json, id: content_block.id, content_block: new_content_block
+      expect(ContentBlock.first.content).to eq(new_content_block[:content])
     end
   end
 
   describe 'DELETE /api/content_blocks/:id' do
     it 'checks whether a record can be deleted' do
-      delete :destroy, format: :json, id: content_block.id
+      delete :destroy, format: :json, api_key: '1', id: content_block.id
       expect(ContentBlock.count).to be 0
     end
   end
