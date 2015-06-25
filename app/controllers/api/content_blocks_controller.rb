@@ -35,7 +35,7 @@ module Api
     end
 
     def api_key_param
-      params[:content_block][:api_key]
+      params[:api_key]
     end
   end
 end
