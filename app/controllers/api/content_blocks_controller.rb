@@ -5,10 +5,6 @@ module Api
 
     respond_to :json
 
-    def index
-      respond_with ContentBlock.all
-    end
-
     def show
       respond_with @content_block
     end

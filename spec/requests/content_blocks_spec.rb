@@ -5,14 +5,6 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
   let(:json) { JSON.parse(response.body) }
   let(:content_block) { create(:content_block) }
 
-  describe 'GET /api/content_blocks' do
-    it 'checks whether the right JSON responds to a GET request to the index action' do
-      create_list(:content_block, 2)
-      get :index, format: :json
-      expect(response.body).to eq(ContentBlock.all.to_json)
-    end
-  end
-
   describe 'GET /api/content_blocks/:id' do
     it 'checks whether the right JSON responds to a GET request to a show action' do
       get :show, format: :json, id: content_block.id
