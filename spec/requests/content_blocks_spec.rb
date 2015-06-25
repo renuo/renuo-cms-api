@@ -7,7 +7,7 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
 
   describe 'GET /api/content_blocks/:id' do
     it 'checks whether the right JSON responds to a GET request to a show action' do
-      get :show, format: :json, id: content_block.id
+      get :show, format: :json, id: content_block.id, content_block: {api_key: content_block.api_key}
       expect(response.body).to eq(content_block.to_json)
     end
   end
@@ -34,7 +34,7 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
 
   describe 'DELETE /api/content_blocks/:id' do
     it 'checks whether a record can be deleted' do
-      delete :destroy, format: :json, api_key: '1', id: content_block.id
+      delete :destroy, format: :json, api_key: '1', id: content_block.id, content_block: {api_key: content_block.api_key}
       expect(ContentBlock.count).to be 0
     end
   end

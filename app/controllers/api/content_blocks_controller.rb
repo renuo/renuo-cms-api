@@ -24,14 +24,18 @@ module Api
     private
 
     def set_content_block
-      @content_block = ContentBlock.find(params[:id])
+      @content_block = ContentBlock.find_by(api_key: api_key_param, id: params[:id])
     end
 
     def content_block_params
-      unless params[:content_block][:api_key].present?
+      unless api_key_param.present?
         raise(ActionController::ParameterMissing.new(:api_key))
       end
       params.require(:content_block).permit(:api_key, :content_path, :content)
+    end
+
+    def api_key_param
+      params[:content_block][:api_key]
     end
   end
 end
