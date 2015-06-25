@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     scope '/content_blocks', controller: :content_blocks do
       scope '/:api_key' do
         post action: :create
-        scope '/:id' do
+        scope '/*content_path' do
           get action: :show
           put action: :update
           delete action: :destroy

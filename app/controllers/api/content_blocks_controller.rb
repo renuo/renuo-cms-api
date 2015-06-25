@@ -24,18 +24,20 @@ module Api
     private
 
     def set_content_block
-      @content_block = ContentBlock.find_by(api_key: api_key_param, id: params[:id])
+      @content_block = ContentBlock.find_by(api_key: api_key_param, content_path: content_path_param)
     end
 
     def content_block_params
-      unless api_key_param.present?
-        raise(ActionController::ParameterMissing.new(:api_key))
-      end
+      # TODO: what to permit here (are there differences between PUT and POST?)?
       params.require(:content_block).permit(:api_key, :content_path, :content)
     end
 
+    def content_path_param
+      params.try(:[] ,:content_path) || raise(ActionController::ParameterMissing.new(:content_path))
+    end
+
     def api_key_param
-      params[:api_key]
+      params.try(:[], :api_key) || raise(ActionController::ParameterMissing.new(:api_key))
     end
   end
 end
