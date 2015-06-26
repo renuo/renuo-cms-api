@@ -25,6 +25,7 @@ module Api
 
     def set_content_block
       @content_block = ContentBlock.find_by(api_key: api_key_param, content_path: content_path_param)
+      head :not_found unless @content_block
     end
 
     def content_block_params
