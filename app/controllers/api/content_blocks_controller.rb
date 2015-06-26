@@ -33,15 +33,15 @@ module Api
     end
 
     def api_key_param
-      params.try(:[], :api_key) || raise(ActionController::ParameterMissing.new(:api_key))
+      params.require(:api_key)
     end
 
     def content_path_param
-      params.try(:[] ,:content_path) || raise(ActionController::ParameterMissing.new(:content_path))
+      params.require(:content_path)
     end
 
     def private_api_key_param
-      params.try(:[], :private_api_key) || raise(ActionController::ParameterMissing.new(:private_api_key))
+      params.require(:private_api_key)
     end
 
     def verify_private_api_key
