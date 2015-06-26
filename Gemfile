@@ -2,12 +2,12 @@ source 'https://rubygems.org'
 ruby File.read('.ruby-version').strip
 
 gem 'rails'
+gem 'rails-api'
 gem 'pg'
 gem 'figaro'
 gem 'rails-i18n'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-timeout'
-gem 'responders'
 
 group :development do
   gem 'better_errors'

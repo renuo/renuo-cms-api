@@ -2,8 +2,10 @@ require 'rails_helper'
 
 RSpec.describe ContentBlock, type: :model do
   it 'reads a content_blocks content' do
-    content_block = create(:content_block)
+    content_block = build(:content_block)
     expect(content_block.content).to_not be_falsey
+    expect(content_block.content_path).to_not be_falsey
+    expect(content_block.api_key).to_not be_falsey
   end
 
   it 'checks whether a content_blocks content can be edited' do

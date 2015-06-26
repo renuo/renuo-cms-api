@@ -1,20 +1,14 @@
 module Api
   class ContentBlocksController < ApplicationController
     before_action :set_content_block, only: [:show, :update, :destroy]
-    skip_before_action :verify_authenticity_token
-
-    respond_to :json
-
-    def index
-      respond_with ContentBlock.all
-    end
+    before_action :verify_private_api_key, except: [:show]
 
     def show
-      respond_with @content_block
+      render json: @content_block
     end
 
     def create
-      render json: ContentBlock.create(content_block_params)
+      render json: ContentBlock.create(content_block_params), status: :created
     end
 
     def update
@@ -28,11 +22,29 @@ module Api
     private
 
     def set_content_block
-      @content_block = ContentBlock.find(params[:id])
+      @content_block = ContentBlock.find_by(api_key: api_key_param, content_path: content_path_param)
+      head :not_found unless @content_block
     end
 
     def content_block_params
-      params.require(:content_block).permit(:content_path, :content)
+      params.require(:content_block).permit(:api_key, :content_path, :content)
+    end
+
+    def api_key_param
+      params.require(:api_key)
+    end
+
+    def content_path_param
+      params.require(:content_path)
+    end
+
+    def private_api_key_param
+      params.require(:private_api_key)
+    end
+
+    def verify_private_api_key
+      private_api_key = CredentialPair.exists?(private_api_key: private_api_key_param)
+      head :unauthorized unless private_api_key
     end
   end
 end

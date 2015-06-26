@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
-    resources :content_blocks
+    scope '/content_blocks', controller: :content_blocks do
+      scope '/:api_key' do
+        post action: :create
+        scope '/*content_path' do
+          get action: :show
+          patch action: :update
+          delete action: :destroy
+        end
+      end
+    end
   end
 
   get 'home/check'
