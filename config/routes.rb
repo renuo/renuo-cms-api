@@ -8,7 +8,7 @@ Rails.application.routes.draw do
         post action: :create
         scope '/*content_path' do
           get action: :show
-          put action: :update
+          patch action: :update
           delete action: :destroy
         end
       end

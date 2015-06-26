@@ -29,7 +29,7 @@ module Api
     end
 
     def content_block_params
-      # TODO: What to permit here? Are there differences between PUT and POST?
+      # TODO: What to permit here? Are there differences between PATCH and POST?
       params.require(:content_block).permit(:api_key, :content_path, :content)
     end
 

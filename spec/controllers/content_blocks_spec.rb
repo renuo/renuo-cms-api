@@ -75,26 +75,26 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
       end
     end
 
-    describe 'PUT update' do
+    describe 'PATCH update' do
       it 'checks wether a record gets created when posting JSON' do
         new_content_block = {
           api_key: content_block.api_key,
           content: 'foo baz'
         }
-        put :update, authorized_api_params.merge(content_block: new_content_block)
+        patch :update, authorized_api_params.merge(content_block: new_content_block)
         expect(response).to have_http_status(:ok)
         expect(assigns(:content_block)).to eq(content_block)
         expect(ContentBlock.first.content).to eq(new_content_block[:content])
       end
 
       it 'doesnt find a resource' do
-        put :update, invalid_authorized_api_params
+        patch :update, invalid_authorized_api_params
         expect(assigns(:content_block)).to be_nil
         expect(response).to have_http_status(:not_found)
       end
 
       it 'blocks upon wrong credentials' do
-        put :update, unauthorized_api_params
+        patch :update, unauthorized_api_params
         expect(assigns(:content_block)).to eq(content_block)
         expect(response).to have_http_status(:unauthorized)
       end
