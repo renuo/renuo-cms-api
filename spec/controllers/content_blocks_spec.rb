@@ -3,11 +3,12 @@ require 'rails_helper'
 RSpec.describe Api::ContentBlocksController, type: :controller do
   render_views
 
-  let!(:content_block) { create(:content_block) }
+  let!(:content_block) { create(:content_block_with_credentials) }
   let!(:default_api_params) do
     {
       format: :json,
       api_key: content_block.api_key,
+      private_api_key: 'abcd',
       content_path: content_block.content_path
     }
   end
@@ -47,4 +48,7 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
       expect(ContentBlock.count).to be 0
     end
   end
+
+  # TODO: write shared examples
+  # to be able to test the api behaviour regarding the presence of a private api key
 end

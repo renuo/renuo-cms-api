@@ -1,12 +1,12 @@
 module Api
   class ContentBlocksController < ApplicationController
     before_action :set_content_block, only: [:show, :update, :destroy]
-    skip_before_action :verify_authenticity_token
+    before_action :verify_private_api_key, except: [:show]
 
     respond_to :json
 
     def show
-      respond_with @content_block
+      render json: @content_block
     end
 
     def create
@@ -28,16 +28,25 @@ module Api
     end
 
     def content_block_params
-      # TODO: what to permit here (are there differences between PUT and POST?)?
+      # TODO: what to permit here (are there differences between PUT and POST)?
       params.require(:content_block).permit(:api_key, :content_path, :content)
+    end
+
+    def api_key_param
+      params.try(:[], :api_key) || raise(ActionController::ParameterMissing.new(:api_key))
     end
 
     def content_path_param
       params.try(:[] ,:content_path) || raise(ActionController::ParameterMissing.new(:content_path))
     end
 
-    def api_key_param
-      params.try(:[], :api_key) || raise(ActionController::ParameterMissing.new(:api_key))
+    def private_api_key_param
+      params.try(:[], :private_api_key) || raise(ActionController::ParameterMissing.new(:private_api_key))
+    end
+
+    def verify_private_api_key
+      private_api_key = CredentialPair.exists?(private_api_key: params[:private_api_key_param])
+      head :unauthorized unless private_api_key
     end
   end
 end
