@@ -24,11 +24,17 @@ ActiveRecord::Schema.define(version: 20150625140930) do
     t.string   "api_key"
   end
 
+  add_index "content_blocks", ["api_key", "content_path"], name: "index_content_blocks_on_api_key_and_content_path", unique: true, using: :btree
+  add_index "content_blocks", ["api_key"], name: "index_content_blocks_on_api_key", using: :btree
+
   create_table "credential_pairs", force: :cascade do |t|
     t.string   "private_api_key", null: false
     t.string   "api_key",         null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
+
+  add_index "credential_pairs", ["api_key"], name: "index_credential_pairs_on_api_key", using: :btree
+  add_index "credential_pairs", ["private_api_key"], name: "index_credential_pairs_on_private_api_key", unique: true, using: :btree
 
 end
