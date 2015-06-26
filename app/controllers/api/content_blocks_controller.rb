@@ -3,8 +3,6 @@ module Api
     before_action :set_content_block, only: [:show, :update, :destroy]
     before_action :verify_private_api_key, except: [:show]
 
-    respond_to :json
-
     def show
       render json: @content_block
     end
