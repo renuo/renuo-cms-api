@@ -40,7 +40,7 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
         expect do
           post :create, elevated_api_params.merge(content_block: content_block_attributes)
         end.to change { ContentBlock.count }.by(1)
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(:created)
       end
     end
 

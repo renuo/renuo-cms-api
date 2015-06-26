@@ -10,7 +10,7 @@ module Api
     end
 
     def create
-      render json: ContentBlock.create(content_block_params)
+      render json: ContentBlock.create(content_block_params), status: :created
     end
 
     def update
