@@ -45,7 +45,7 @@ module Api
     end
 
     def verify_private_api_key
-      private_api_key = CredentialPair.exists?(private_api_key: params[:private_api_key_param])
+      private_api_key = CredentialPair.exists?(private_api_key: private_api_key_param)
       head :unauthorized unless private_api_key
     end
   end
