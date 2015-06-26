@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby File.read('.ruby-version').strip
 
 gem 'rails'
+gem 'rails-api'
 gem 'pg'
 gem 'figaro'
 gem 'rails-i18n'
