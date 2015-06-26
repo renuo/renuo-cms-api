@@ -11,7 +11,4 @@ RSpec.describe 'routes for ContentBlocks', type: :routing do
     expect(put: '/api/content_blocks/apikey/sample/path').to be_routable
     expect(delete: '/api/content_blocks/apikey/sample/path').to be_routable
   end
-
 end
-
-
