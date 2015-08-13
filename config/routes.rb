@@ -7,7 +7,6 @@ Rails.application.routes.draw do
           get action: :show
           patch action: :update
           delete action: :destroy
-          post action: :create
         end
       end
     end
