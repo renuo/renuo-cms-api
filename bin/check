@@ -20,3 +20,11 @@ if [ ! $RC -eq 0 ]; then
   echo 'COMMIT ABORTED: rspec has detected one or more security vulnerabilities, please review them and re-commit your changes.'
   exit 1
 fi
+
+mutant_classes="CredentialPair ContentBlock Api::ContentBlocksController"
+RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec `echo $mutant_classes`
+#RC=$?
+#if [ ! $RC -eq 0 ]; then
+#  echo 'COMMIT ABORTED: mutant has found mutations which let your tests still pass.'
+#  exit 1
+#fi
