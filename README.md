@@ -67,7 +67,7 @@ rspec
 
 https://ci.renuo.ch/projects/38
 
-### Code Linting / Vulnerability Check
+### Code Linting / Vulnerability Check / Tests
 
 Rubocop is used to lint the ruby code while Brakeman is used to check for security vulnerabilities.
 They are both run in a pre-commit git hook to insure code quality. If you need to make changes to
@@ -79,6 +79,12 @@ If you want to run the tools manually, you can do so with the following command:
 
 ```sh
 bin/check
+```
+
+If you want to enable mutant testing
+
+```sh
+MUTANT=1 bin/check
 ```
 
 ## Run
