@@ -29,6 +29,7 @@ https://renuo-cms-api-testing.herokuapp.com
 git clone git@git.renuo.ch:renuo/renuo-cms-api.git
 cd renuo-cms-api
 bundle install
+ln -s ../../bin/check .git/hooks/pre-commit
 ```
 
 ## Configuration
