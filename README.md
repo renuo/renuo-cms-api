@@ -22,12 +22,6 @@ https://renuo-cms-api-testing.herokuapp.com
 
 [![build status](https://ci.renuo.ch/projects/38/status.png?ref=testing)](https://ci.renuo.ch/projects/38?ref=testing)
 
-## Ruby on Rails
-
-This application requires:
-
-- Ruby 2.2.1
-- Rails 4.2.1
 
 ## Installation
 
