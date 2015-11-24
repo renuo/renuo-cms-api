@@ -22,6 +22,7 @@ if [ ! $RC -eq 0 ]; then
 fi
 
 if [ ! -z "$MUTANT" ]; then
+  echo 'to use mutatnt, add gem "mutant-rspec" to your Gemfile'
   mutant_classes="CredentialPair ContentBlock Api::ContentBlocksController"
   RAILS_ENV=test bundle exec mutant -r ./config/environment --use rspec `echo $mutant_classes`
   RC=$?
