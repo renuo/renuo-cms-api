@@ -3,9 +3,8 @@ Rails.application.routes.draw do
     scope '/content_blocks', controller: :content_blocks do
       scope '/:api_key' do
         scope '/*content_path' do
-          post action: :create
           get action: :show
-          patch action: :update
+          post action: :update
         end
       end
     end

@@ -12,8 +12,6 @@ module Api
       render json: @content_block
     end
 
-    alias_method(:create, :update)
-
     private
 
     def set_content_block

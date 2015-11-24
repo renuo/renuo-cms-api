@@ -14,12 +14,12 @@ RSpec.describe 'routes for ContentBlocks', type: :routing do
     expect(post: "#{api_base_path}/apikey/sample/path").to be_routable
   end
 
-  it 'routes the update requests via PATCH' do
-    expect(patch: "#{api_base_path}/apikey/sample/path").to be_routable
-  end
-
   it 'routes the get requests via GET' do
     expect(get: "#{api_base_path}/apikey/sample/path").to be_routable
+  end
+
+  it 'does not route the update requests via PATCH' do
+    expect(patch: "#{api_base_path}/apikey/sample/path").not_to be_routable
   end
 
   it 'does not route the DELETE requests' do
