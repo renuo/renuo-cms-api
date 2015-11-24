@@ -22,7 +22,7 @@ module Api
     private
 
     def set_content_block
-      @content_block = ContentBlock.find_by(api_key: api_key_param, content_path: content_path_param)
+      @content_block = ContentBlock.find_by(api_key: params[:api_key], content_path: params[:content_path])
       head :not_found unless @content_block
     end
 
@@ -30,20 +30,8 @@ module Api
       params.require(:content_block).permit(:api_key, :content_path, :content)
     end
 
-    def api_key_param
-      params.require(:api_key)
-    end
-
-    def content_path_param
-      params.require(:content_path)
-    end
-
-    def private_api_key_param
-      params.require(:private_api_key)
-    end
-
     def verify_private_api_key
-      private_api_key = CredentialPair.exists?(private_api_key: private_api_key_param)
+      private_api_key = CredentialPair.exists?(private_api_key: params.require(:private_api_key))
       head :unauthorized unless private_api_key
     end
   end
