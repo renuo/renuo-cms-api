@@ -2,8 +2,14 @@ source 'https://rubygems.org'
 
 ruby File.read('.ruby-version').strip
 
-gem 'rails'
+# instead of rails, use only rails-api and friends
+# this will change when rails 5 is out, since rails-api will be included in rails
+gem 'bundler'
+gem 'activerecord'
+gem 'actionmailer'
+gem 'activesupport'
 gem 'rails-api'
+
 gem 'pg'
 gem 'figaro'
 gem 'rails-i18n'
