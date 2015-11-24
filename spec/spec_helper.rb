@@ -17,5 +17,7 @@ RSpec.configure do |config|
 
   config.order = :random
 
+  config.seed = Date.today.to_s
+
   Kernel.srand config.seed
 end
