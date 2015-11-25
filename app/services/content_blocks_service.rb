@@ -1,11 +1,17 @@
 class ContentBlocksService
-  def find_or_initialize(api_key, content_path)
-    ContentBlock.find_or_initialize_by api_key: api_key, content_path: content_path
+  def initialize(api_key)
+    @api_key = api_key
   end
 
-  def create_or_update(api_key, content_path, content_block_params)
-    content_block = ContentBlock.find_or_initialize_by(api_key: api_key, content_path: content_path)
-    content_block.update!(content_block_params)
+  # @return [ContentBlock]
+  def find_or_initialize(content_path)
+    ContentBlock.find_or_initialize_by api_key: @api_key, content_path: content_path
+  end
+
+  # @return [ContentBlock]
+  def create_or_update(content_path, content_block_params)
+    content_block = find_or_initialize content_path
+    content_block.update! content_block_params
     content_block
   end
 end
