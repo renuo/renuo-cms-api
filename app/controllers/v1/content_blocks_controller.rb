@@ -1,4 +1,4 @@
-module Api
+module V1
   class ContentBlocksController < ApplicationController
     before_action :verify_key_pair, except: [:fetch]
     before_action :initialize_service

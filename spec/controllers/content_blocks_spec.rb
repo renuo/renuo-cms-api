@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::ContentBlocksController, type: :controller do
+RSpec.describe V1::ContentBlocksController, type: :controller do
   render_views
 
   let!(:content_block) { create(:content_block) }
