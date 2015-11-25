@@ -10,7 +10,7 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
       it 'checks whether the right JSON responds to a GET request to a show action' do
         get :fetch, api_key: content_block.api_key, content_path: content_block.content_path
         expect(assigns(:content_block)).to eq(content_block)
-        expect(assigns(:content_block).created_at).to eq(content_block.created_at)
+        expect(assigns(:content_block).created_at).to be_within(5.seconds).of(content_block.created_at)
         expect(response).to have_http_status(:ok)
         object = OpenStruct.new(JSON.parse(response.body)['content_block'])
         expect(object.content).to eq(content_block.content)
