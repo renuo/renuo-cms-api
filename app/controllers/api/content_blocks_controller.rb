@@ -1,14 +1,14 @@
 module Api
   class ContentBlocksController < ApplicationController
-    before_action :verify_key_pair, except: [:show]
+    before_action :verify_key_pair, except: [:fetch]
     before_action :initialize_service
 
-    def show
+    def fetch
       @content_block = @content_blocks_service.find_or_initialize(params[:content_path])
       render json: @content_block
     end
 
-    def update
+    def store
       content_path = params[:content_block][:content_path]
       @content_block = @content_blocks_service.create_or_update(content_path, content_block_params)
 

@@ -6,9 +6,9 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
   let!(:content_block) { create(:content_block) }
 
   context 'requesting a content block' do
-    describe 'GET show' do
+    describe 'GET fetch' do
       it 'checks whether the right JSON responds to a GET request to a show action' do
-        get :show, api_key: content_block.api_key, content_path: content_block.content_path
+        get :fetch, api_key: content_block.api_key, content_path: content_block.content_path
         expect(assigns(:content_block)).to eq(content_block)
         expect(assigns(:content_block).created_at).to eq(content_block.created_at)
         expect(response).to have_http_status(:ok)
@@ -16,7 +16,7 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
       end
 
       it 'renders return an empty content without corresponding resource' do
-        get :show, api_key: 'non-existing-api-key', content_path: 'non-existing-content-path'
+        get :fetch, api_key: 'non-existing-api-key', content_path: 'non-existing-content-path'
         content_block = assigns(:content_block)
         expect(content_block.created_at).to be_nil
         expect(content_block.content).to eq('')
@@ -31,11 +31,11 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
     let!(:credential_pair) { create(:credential_pair, api_key: content_block.api_key) }
     let(:authorized_api_params) { { api_key: content_block.api_key, private_api_key: credential_pair.private_api_key } }
 
-    describe 'create or update' do
+    describe 'POST store' do
       it 'creates a new block content' do
         expect do
           new_params = { content_block: { content: 'new content!', content_path: 'some-content-path' } }
-          post :update, authorized_api_params.merge(new_params)
+          post :store, authorized_api_params.merge(new_params)
         end.to change { ContentBlock.count }.by(1)
 
         expect(ContentBlock.last.content).to eq('new content!')
@@ -43,14 +43,14 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'updates the content of an existing content block' do
+      it 'stores the content of an existing content block' do
         new_content_block = {
           content_path: content_block.content_path,
           api_key: content_block.api_key,
           content: 'some-new-content'
         }
         expect do
-          post :update, authorized_api_params.merge(content_block: new_content_block)
+          post :store, authorized_api_params.merge(content_block: new_content_block)
         end.not_to change { ContentBlock.count }
 
         expect(response).to have_http_status(:ok)
@@ -60,14 +60,14 @@ RSpec.describe Api::ContentBlocksController, type: :controller do
 
       it 'blocks when the private api key is non-existent' do
         unauthorized_api_params = { api_key: content_block.api_key, private_api_key: 'non-existent-private-api-key' }
-        post :update, unauthorized_api_params
+        post :store, unauthorized_api_params
         expect(assigns(:content_block)).to be_nil
         expect(response).to have_http_status(:unauthorized)
       end
 
       it 'does not find a resource' do
         invalid_authorized_api_params = { api_key: 'non-exist', private_api_key: credential_pair.private_api_key }
-        post :update, invalid_authorized_api_params
+        post :store, invalid_authorized_api_params
         expect(assigns(:content_block)).to be_nil
         expect(response).to have_http_status(:unauthorized)
       end
