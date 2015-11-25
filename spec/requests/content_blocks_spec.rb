@@ -18,7 +18,8 @@ RSpec.describe 'ContentBlocks', type: :request do
     end
 
     it 'updates a content block' do
-      post "/v1/#{credential_pair.api_key}/content_blocks", private_api_key: credential_pair.private_api_key,
+      post "/v1/#{credential_pair.api_key}/content_blocks",
+           private_api_key: credential_pair.private_api_key,
            content_block: {
              content: 'new content',
              content_path: content_block.content_path,
@@ -36,7 +37,8 @@ RSpec.describe 'ContentBlocks', type: :request do
     end
 
     it 'creates a content block' do
-      post "/v1/#{credential_pair.api_key}/content_blocks", private_api_key: credential_pair.private_api_key,
+      post "/v1/#{credential_pair.api_key}/content_blocks",
+           private_api_key: credential_pair.private_api_key,
            content_block: {
              content: 'bla content',
              content_path: 'blub-path',
