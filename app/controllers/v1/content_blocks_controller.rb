@@ -5,14 +5,14 @@ module V1
 
     def fetch
       @content_block = @content_blocks_service.find_or_initialize(params[:content_path])
-      render json: @content_block
+      render json: @content_block, serializer: ContentBlockSerializer
     end
 
     def store
       content_path = params[:content_block][:content_path]
       @content_block = @content_blocks_service.create_or_update(content_path, content_block_params)
 
-      render json: @content_block
+      render json: @content_block, serializer: ContentBlockSerializer
     end
 
     private

@@ -9,6 +9,7 @@ gem 'activerecord'
 gem 'actionmailer'
 gem 'activesupport'
 gem 'rails-api'
+gem 'active_model_serializers'
 
 gem 'pg'
 gem 'figaro'
