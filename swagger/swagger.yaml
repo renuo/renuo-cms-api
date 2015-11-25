@@ -1,0 +1,139 @@
+swagger: '2.0'
+info:
+  title: Renuo CMS API
+  description: |
+    Load and store dynamic content using Renuo CMS API
+
+    The content blocks are blocks of *contents* of text which represent a
+    any content. Each block is addressed by a certain *content path* and a
+    *public API key*. For creating and editing content, a *private* API key is
+    required.
+
+    The format of these blocks may be any *text-based format*, for example:
+
+    * HTML
+    * Markdown
+    * Text
+    * JSON
+    * etc.
+
+    Currently, it's the developers decision and responsability to chose and
+    render the correct format. In other words: Shit in, Shit out.
+
+  version: 1.0.0
+host: renuo-cms-api-testing.herokuapp.com
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json
+parameters:
+  api_key:
+    name: api_key
+    in: path
+    description: The public API key.
+    required: true
+    type: string
+  private_api_key:
+    name: private_api_key
+    in: query
+    description: The private api key is only needed to edit content blocks. Don't make it public!
+    required: true
+    type: string
+  content_path:
+    name: content_path
+    in: path
+    description: The content path identifies a content block.
+    required: true
+    type: string
+paths:
+  /{api_key}/content_blocks/{content_path}:
+    get:
+      summary: Gets a content block
+      description: |
+        The content blocks endpoint returns the content block given a public
+        API key and a content path.
+      parameters:
+        - $ref: "#/parameters/api_key"
+        - $ref: "#/parameters/content_path"
+      tags:
+        - ContentBlocks
+      responses:
+        '200':
+          description: The content block with the given api_key and the content_path
+          schema:
+            $ref: '#/definitions/ContentBlock'
+
+  /{api_key}/content_blocks:
+    post:
+      summary: Stores a content block
+      description: Stores a content block. If a content block with the same path
+        and public api key already exists, the content is overwritten. Otherwise,
+        a new content block is created.
+      parameters:
+        - $ref: "#/parameters/api_key"
+      tags:
+        - ContentBlocks
+      responses:
+        '200':
+          description: The new or updated content block
+          schema:
+            $ref: '#/definitions/ContentBlock'
+        default:
+          description: Unauthorized
+
+    get:
+      summary: "[todo: not yet implemented] Gets all Content Blocks"
+      description: |
+        The content blocks endpoint returns all content blocks given a public
+        API key.
+      parameters:
+        - $ref: "#/parameters/api_key"
+        - $ref: "#/parameters/private_api_key"
+      tags:
+        - ContentBlocks
+      responses:
+        '200':
+          description: An array of all content blocks with the api_key
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ContentBlock'
+
+definitions:
+  ContentBlock:
+    type: object
+    properties:
+      content:
+        type: string
+        description: The content of the content block in any text-based format (see above).
+      content_path:
+        type: string
+        description: |
+          The identifier of the content. E.g. my-special-page. May
+          also contain special characters like "/".
+      api_key:
+        type: string
+        description: |
+          The public API key.
+
+          This key has to be requested (ask lukas.elmer@renuo.ch) before use.
+
+          Like the name suggests, this key is supposed to be
+          public. It consists of [0-9a-zA-Z]. The length of the public key can be
+          chosen individually, depending on how secret the content is (usually
+          between 3 and 16 characters). E.g.
+
+          * 3 characters = (26*2+10)^3 = 238'328 ~= 10^5
+          * 4 characters = (26*2+10)^4 = 14'776'336 ~= 10^7
+          * 8 characters = (26*2+10)^8 ~= 10^14
+          * 12 characters = (26*2+10)^8 ~= 10^21
+          * 16 characters = (26*2+10)^8 ~= 10^28
+      created_at:
+        type: string
+        format: date-time
+        description: The time of creation.
+      updated_at:
+        type: string
+        format: date-time
+        description: The time of the last update.
