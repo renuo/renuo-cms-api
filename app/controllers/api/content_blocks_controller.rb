@@ -3,16 +3,14 @@ module Api
     before_action :verify_private_api_key, except: [:show]
 
     def show
-      @content_block = ContentBlock.find_or_initialize_by api_key: params[:api_key], content_path: params[:content_path]
+      @content_block = ContentBlocksService.new.find_or_initialize(params[:api_key], params[:content_path])
       render json: @content_block
     end
 
     def update
       content_path = params[:content_block][:content_path]
       api_key = params[:api_key]
-
-      @content_block = ContentBlock.find_or_initialize_by(api_key: api_key, content_path: content_path)
-      @content_block.update!(content_block_params)
+      @content_block = ContentBlocksService.new.create_or_update(api_key, content_path, content_block_params)
 
       render json: @content_block
     end
