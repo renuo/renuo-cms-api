@@ -72,6 +72,13 @@ paths:
         a new content block is created.
       parameters:
         - $ref: "#/parameters/api_key"
+        - $ref: "#/parameters/private_api_key"
+        - name: content_block
+          in: body
+          description: The content block to store
+          required: true
+          schema:
+            $ref: "#/definitions/StoreContentBlock"
       tags:
         - ContentBlocks
       responses:
@@ -89,7 +96,6 @@ paths:
         API key.
       parameters:
         - $ref: "#/parameters/api_key"
-        - $ref: "#/parameters/private_api_key"
       tags:
         - ContentBlocks
       responses:
@@ -101,6 +107,23 @@ paths:
               $ref: '#/definitions/ContentBlock'
 
 definitions:
+  StoreContentBlock:
+    type: object
+    properties:
+      content_block:
+        type: object
+        $ref: "#/definitions/ContentBlockParameters"
+  ContentBlockParameters:
+    type: object
+    properties:
+      content:
+        type: string
+        description: The content of the content block in any text-based format (see above).
+      content_path:
+        type: string
+        description: |
+          The identifier of the content. E.g. my-special-page. May
+          also contain special characters like "/".
   ContentBlock:
     type: object
     properties:
