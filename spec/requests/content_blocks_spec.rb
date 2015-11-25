@@ -17,7 +17,7 @@ RSpec.describe 'ContentBlocks', type: :request do
       expect(object.id).to be_nil
     end
   end
-  
+
   context '#store' do
     it 'updates a content block' do
       post "/v1/#{credential_pair.api_key}/content_blocks",
