@@ -11,7 +11,7 @@ RSpec.describe 'routes for ContentBlocks', type: :routing do
   end
 
   it 'routes the create requests via POST' do
-    expect(post: "#{api_base_path}/apikey/sample/path").to be_routable
+    expect(post: "#{api_base_path}/apikey").to be_routable
   end
 
   it 'routes the get requests via GET' do
@@ -27,6 +27,6 @@ RSpec.describe 'routes for ContentBlocks', type: :routing do
   end
 
   it 'does not route the "wrong" POST request' do
-    expect(post: "#{api_base_path}/apikey").not_to be_routable
+    expect(post: "#{api_base_path}/apikey/sample/path").not_to be_routable
   end
 end

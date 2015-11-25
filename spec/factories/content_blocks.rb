@@ -5,7 +5,7 @@ FactoryGirl.define do
     api_key Kernel.rand(1_000_000_000..2_000_000_000).to_s(16)
 
     factory :content_block_with_credentials do
-      after(:create) { |cb, _e| create(:credential_pair, api_key: cb.api_key) }
+      after(:create) { |content_block, _e| create(:credential_pair, api_key: content_block.api_key) }
     end
   end
 end

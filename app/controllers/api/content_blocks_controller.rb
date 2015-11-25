@@ -1,21 +1,26 @@
 module Api
   class ContentBlocksController < ApplicationController
     before_action :verify_private_api_key, except: [:show]
-    before_action :set_content_block
 
     def show
+      @content_block = ContentBlock.find_or_initialize_by api_key: params[:api_key], content_path: params[:content_path]
       render json: @content_block
     end
 
     def update
-      @content_block.update!(content: params[:content_block][:content])
+      content_path = params[:content_block][:content_path]
+      api_key = params[:api_key]
+
+      @content_block = ContentBlock.find_or_initialize_by(api_key: api_key, content_path: content_path)
+      @content_block.update!(content_block_params)
+
       render json: @content_block
     end
 
     private
 
-    def set_content_block
-      @content_block = ContentBlock.find_or_initialize_by api_key: params[:api_key], content_path: params[:content_path]
+    def content_block_params
+      params.require(:content_block).permit(:content)
     end
 
     def verify_private_api_key
