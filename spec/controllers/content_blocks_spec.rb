@@ -12,7 +12,10 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
         expect(assigns(:content_block)).to eq(content_block)
         expect(assigns(:content_block).created_at).to eq(content_block.created_at)
         expect(response).to have_http_status(:ok)
-        expect(response.body).to eq(content_block.to_json)
+        object = OpenStruct.new(JSON.parse(response.body)['content_block'])
+        expect(object.content).to eq(content_block.content)
+        expect(object.content_path).to eq(content_block.content_path)
+        expect(object.api_key).to eq(content_block.api_key)
       end
 
       it 'renders return an empty content without corresponding resource' do
