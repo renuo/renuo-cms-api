@@ -1,6 +1,10 @@
 # Renuo CMS API
 
-The soon-to-be central CMS of Renuo LLC. Is a work in progress.
+The soon-to-be central CMS of [Renuo](https://www.renuo.ch). Is a work in progress.
+
+## API Documentation
+
+See doc/README.md.
 
 ## Domains
 
@@ -28,71 +32,71 @@ https://renuo-cms-api-testing.herokuapp.com
 ```sh
 git clone git@git.renuo.ch:renuo/renuo-cms-api.git
 cd renuo-cms-api
-bundle install
-ln -s ../../bin/check .git/hooks/pre-commit
+bin/setup
 ```
 
-## Configuration
+### Configuration
 
 Copy the database and application example-config files and fill out the missing values.
 Password and API-keys can be found in the Redmine Wiki.
 
+* config/database.yml
+* config/application.yml
+
 ```sh
-cp config/database.example.yml config/database.yml
-cp config/application.example.yml config/application.yml
+bin/setup
 ```
 
 ## Database
 
-Setup the database for the development environment:
-
 ```sh
-bundle exec rake db:drop db:setup
+bin/setup
 ```
 
-## Tests
+## Tests / Code Linting / Vulnerability Check
 
-### Run Tests
-
-```sh
-rspec
-```
-
-### CI
-
-https://ci.renuo.ch/projects/38
-
-### Code Linting / Vulnerability Check / Tests
-
-Rubocop is used to lint the ruby code while Brakeman is used to check for security vulnerabilities.
-They are both run in a pre-commit git hook to insure code quality. If you need to make changes to
-the Rubocop configuration edit the .rubocop.yml file (configuration here: https://github.com/bbatsov/rubocop#configuration)
-
-If you want to add other tools to the pre-commit hook, edit the script at .git/hooks/pre-commit.
-
-If you want to run the tools manually, you can do so with the following command:
+### Everything
 
 ```sh
 bin/check
 ```
 
-If you want to enable mutant testing
+This runs
+
+* rspec
+* rubocop
+* breakman
+
+### Rspec Only
+
+```sh
+rspec
+```
+
+### Mutant Testing
+
+Need to be enabled. Run
 
 ```sh
 MUTANT=1 bin/check
 ```
 
-## Run
+for instructions.
+
+### CI
+
+https://ci.renuo.ch/projects/38
+
+
+## Server
 
 ```sh
-bundle exec rails s
+rails s
 ```
 
-## Problems?
+## Main Contributors
 
-Nicolas Eckhart is currently working on this application.
-
-![Nicolas Eckhart](http://www.gravatar.com/avatar/742cec893c283daf4a3c287ef2681599)
+![Nicolas Eckhart](https://www.gravatar.com/avatar/742cec893c283daf4a3c287ef2681599) ![Lukas Elmer](https://www.gravatar.com/avatar/697b8e2d3bde4d895eca4fe2dcfe9239.jpg)
 
 ## Copyright
 

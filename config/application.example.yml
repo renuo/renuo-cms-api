@@ -16,8 +16,3 @@ NEW_RELIC_APP_NAME: 'renuo-cms-api-<branch>'
 
 # Add 3 new projects for develop/master/testing at https://app.getsentry.com/organizations/renuo/projects/new/
 SENTRY_DSN: ''
-
-# This is used to seed your database
-# Use a random password for develop/master/testing
-ADMIN_EMAIL: '<yourname>+renuo-cms-api@renuo.ch'
-ADMIN_PASSWORD: 'developer'
