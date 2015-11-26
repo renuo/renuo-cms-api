@@ -3,9 +3,7 @@ Rails.application.routes.draw do
     scope '/:api_key' do
       scope '/content_blocks', controller: :content_blocks do
         post action: :store
-        scope '/*content_path' do
-          get action: :fetch
-        end
+        get '/*content_path' => 'content_blocks#fetch'
       end
     end
   end
