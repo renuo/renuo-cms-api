@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe V1::ContentBlocksController, type: :controller do
-  render_views
-
   let!(:content_block) { create(:content_block) }
 
   context 'requesting a content block' do
