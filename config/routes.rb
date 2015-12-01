@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   end
 
   get 'home/check'
-  root 'content_blocks#index'
+  root 'home#check'
 end

@@ -91,7 +91,7 @@ https://ci.renuo.ch/projects/38
 ## Server
 
 ```sh
-rails s
+rails s -b renuo-cms-api.dev
 ```
 
 ## Main Contributors
