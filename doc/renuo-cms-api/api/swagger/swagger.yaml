@@ -75,7 +75,7 @@ paths:
         - $ref: "#/parameters/private_api_key"
         - name: content_block
           in: body
-          description: The content block to store
+          description: The content block to store. This content block has less parameters than a "normal" content block.
           required: true
           schema:
             $ref: "#/definitions/StoreContentBlock"
