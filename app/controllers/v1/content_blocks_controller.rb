@@ -1,6 +1,6 @@
 module V1
   class ContentBlocksController < ApplicationController
-    before_action :verify_key_pair, except: [:fetch]
+    before_action :verify_key_pair, only: [:store]
     before_action :initialize_service
 
     def fetch

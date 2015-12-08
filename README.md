@@ -47,12 +47,6 @@ Password and API-keys can be found in the Redmine Wiki.
 bin/setup
 ```
 
-## Database
-
-```sh
-bin/setup
-```
-
 ## Tests / Code Linting / Vulnerability Check
 
 ### Everything
@@ -65,23 +59,13 @@ This runs
 
 * rspec
 * rubocop
-* breakman
+* brakeman
 
 ### Rspec Only
 
 ```sh
 rspec
 ```
-
-### Mutant Testing
-
-Need to be enabled. Run
-
-```sh
-MUTANT=1 bin/check
-```
-
-for instructions.
 
 ### CI
 

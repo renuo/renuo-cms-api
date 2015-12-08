@@ -20,6 +20,4 @@ AllCops:
     - 'log/**/*'
     - 'public/**/*'
     - 'tmp/**/*'
-    - 'config/unicorn.rb'
     - 'db/**/*'
-    # - 'spec/**/*'

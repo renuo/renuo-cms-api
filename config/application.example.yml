@@ -1,9 +1,4 @@
-# Create one new account mandrill+<application>@renuo.ch at https://mandrillapp.com/ for develop/master/testing
-# Document the credentials here: https://redmine.renuo.ch/projects/<application>/wiki
-MAIL_USERNAME: ''
-MAIL_PASSWORD: ''
-MAIL_SENDER: '<yourname>+renuo-cms-api@renuo.ch'
-# Use /etc/hosts to change the dns to 127.0.0.1
+# Run bin/setup to configure the hostname for your local dev env
 APP_HOST: 'renuo-cms-api.dev'
 APP_PORT: '3000'
 
