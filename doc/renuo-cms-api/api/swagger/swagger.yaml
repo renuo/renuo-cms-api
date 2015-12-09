@@ -78,7 +78,7 @@ paths:
           description: The content block to store. This content block has less parameters than a "normal" content block.
           required: true
           schema:
-            $ref: "#/definitions/StoreContentBlock"
+            $ref: "#/definitions/StoreContentRequest"
       tags:
         - ContentBlocks
       responses:
@@ -107,7 +107,7 @@ paths:
               $ref: '#/definitions/ContentBlock'
 
 definitions:
-  StoreContentBlock:
+  StoreContentRequest:
     type: object
     properties:
       content_block:
