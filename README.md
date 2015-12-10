@@ -30,7 +30,7 @@ https://renuo-cms-api-testing.herokuapp.com
 ## Installation
 
 ```sh
-git clone git@git.renuo.ch:renuo/renuo-cms-api.git
+git clone git@github.com:renuo/renuo-cms-api.git
 cd renuo-cms-api
 bin/setup
 ```
