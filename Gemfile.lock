@@ -53,6 +53,8 @@ GEM
       terminal-table (~> 1.4)
     builder (3.2.2)
     byebug (8.2.1)
+    codeclimate-test-reporter (0.4.8)
+      simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.0)
     database_cleaner (1.5.1)
     debug_inspector (0.0.2)
@@ -186,6 +188,7 @@ DEPENDENCIES
   brakeman
   bundler
   byebug
+  codeclimate-test-reporter
   database_cleaner
   factory_girl_rails
   faker
