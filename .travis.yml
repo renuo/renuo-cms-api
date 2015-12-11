@@ -3,6 +3,8 @@ cache:
   bundler: true
   apt: true
 addons:
+  code_climate:
+    repo_token: a318ed48e37de491dda0591e741a8bc1fb8421f9a7592e4e44eb1133ed183a2d
   postgresql: '9.4'
   apt:
     packages:

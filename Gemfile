@@ -18,10 +18,10 @@ gem 'rack-timeout'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'brakeman', require: false
 end
 
 group :development, :test do
+  gem 'brakeman', require: false
   gem 'rubocop'
   gem 'byebug'
   gem 'faker'
