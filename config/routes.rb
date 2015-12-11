@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     scope '/:api_key' do
       scope '/content_blocks', controller: :content_blocks do
         post action: :store
+        get action: :batch_fetch
         get '/*content_path' => 'content_blocks#fetch'
       end
     end

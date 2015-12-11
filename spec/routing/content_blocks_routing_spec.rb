@@ -17,6 +17,11 @@ RSpec.describe 'routes for ContentBlocks', type: :routing do
     expect(get: "#{api_base_path}/sample/path").to route_to(expected)
   end
 
+  it 'routes the batch get requests via GET' do
+    expected = basic_expected.merge(action: 'batch_fetch')
+    expect(get: "#{api_base_path}").to route_to(expected)
+  end
+
   it 'does not route the update requests via PATCH' do
     expect(patch: "#{api_base_path}/sample/path").not_to be_routable
   end
