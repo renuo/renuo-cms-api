@@ -15,6 +15,7 @@ AllCops:
     - '**/Rakefile'
     - '**/config.ru'
   Exclude:
+    - 'vendor/**/*'
     - 'bin/**/*'
     - 'script/**/*'
     - 'log/**/*'
