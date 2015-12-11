@@ -90,7 +90,7 @@ paths:
           description: Unauthorized
 
     get:
-      summary: "[todo: not yet implemented] Gets all Content Blocks"
+      summary: "[not yet implemented] Gets all Content Blocks"
       description: |
         The content blocks endpoint returns all content blocks given a public
         API key.
