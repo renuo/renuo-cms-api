@@ -5,7 +5,7 @@ RSpec.describe CredentialPair, type: :model do
     credential_pair = build(:credential_pair)
     expect(credential_pair.api_key).to be_truthy
     expect(credential_pair.private_api_key).to be_truthy
-    expect(credential_pair.project_name).to be_truthy
+    expect(credential_pair.project_name).to start_with('project-')
   end
 
   it 'validates the credential pair project name' do
