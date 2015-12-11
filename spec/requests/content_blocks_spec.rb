@@ -4,17 +4,34 @@ RSpec.describe 'ContentBlocks', type: :request do
   let!(:content_block) { create(:content_block) }
   let!(:credential_pair) { create(:credential_pair, api_key: content_block.api_key) }
 
+  # rubocop:disable Metrics/AbcSize
+  def compare_content_blocks(object, content_block)
+    expect(object.content_path).to eq(content_block.content_path)
+    expect(object.content).to eq(content_block.content)
+    expect(object.api_key).to eq(content_block.api_key)
+    expect(object.created_at).to eq(content_block.created_at.as_json)
+    expect(object.updated_at).to eq(content_block.updated_at.as_json)
+    expect(object.id).to be_nil
+  end
+  # rubocop:enable Metrics/AbcSize
+
+  context '#batch_fetch' do
+    it 'fetches multiple content blocks' do
+      get "/v1/#{credential_pair.api_key}/content_blocks"
+      expect(response).to have_http_status(200)
+      blocks = JSON.parse(response.body)['content_blocks']
+      expect(blocks.size).to eq(1)
+      object = OpenStruct.new(blocks[0])
+      compare_content_blocks(object, content_block)
+    end
+  end
+
   context '#fetch' do
     it 'fetches a content block' do
       get "/v1/#{credential_pair.api_key}/content_blocks/#{content_block.content_path}"
       expect(response).to have_http_status(200)
       object = OpenStruct.new(JSON.parse(response.body)['content_block'])
-      expect(object.content_path).to eq(content_block.content_path)
-      expect(object.content).to eq(content_block.content)
-      expect(object.api_key).to eq(content_block.api_key)
-      expect(object.created_at).to eq(content_block.created_at.as_json)
-      expect(object.updated_at).to eq(content_block.updated_at.as_json)
-      expect(object.id).to be_nil
+      compare_content_blocks(object, content_block)
     end
   end
 
