@@ -67,9 +67,10 @@ This runs
 rspec
 ```
 
-### CI
+### CI & Code Quality
 
-https://ci.renuo.ch/projects/38
+* https://travis-ci.org/renuo/renuo-cms-api
+* https://codeclimate.com/github/renuo/renuo-cms-api
 
 
 ## Server
