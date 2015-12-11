@@ -5,7 +5,6 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
 
   context 'requesting a content block' do
     describe 'GET batch_fetch' do
-      # rubocop:disable Metrics/AbcSize
       def check_object(blocks, index, content_block)
         object = OpenStruct.new(blocks[index])
         expect(object.content).to eq(content_block.content)
@@ -13,8 +12,6 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
         expect(object.api_key).to eq(content_block.api_key)
         expect(object.id).to be_nil
       end
-
-      # rubocop:enable Metrics/AbcSize
 
       it 'returns the right JSON content' do
         content_block2 = create(:content_block, api_key: content_block.api_key)

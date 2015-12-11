@@ -22,3 +22,8 @@ AllCops:
     - 'public/**/*'
     - 'tmp/**/*'
     - 'db/**/*'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/controllers/**/*'
+    - 'spec/requests/**/*'

@@ -4,7 +4,6 @@ RSpec.describe 'ContentBlocks', type: :request do
   let!(:content_block) { create(:content_block) }
   let!(:credential_pair) { create(:credential_pair, api_key: content_block.api_key) }
 
-  # rubocop:disable Metrics/AbcSize
   def compare_content_blocks(object, content_block)
     expect(object.content_path).to eq(content_block.content_path)
     expect(object.content).to eq(content_block.content)
@@ -13,7 +12,6 @@ RSpec.describe 'ContentBlocks', type: :request do
     expect(object.updated_at).to eq(content_block.updated_at.as_json)
     expect(object.id).to be_nil
   end
-  # rubocop:enable Metrics/AbcSize
 
   context '#batch_fetch' do
     it 'fetches multiple content blocks' do
