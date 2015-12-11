@@ -8,7 +8,7 @@ module V1
       render json: @content_block
     end
 
-    def batch_fetch
+    def index
       @content_blocks = @content_blocks_service.all
       render json: @content_blocks
     end

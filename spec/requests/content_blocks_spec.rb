@@ -13,7 +13,7 @@ RSpec.describe 'ContentBlocks', type: :request do
     expect(object.id).to be_nil
   end
 
-  context '#batch_fetch' do
+  context '#index' do
     it 'fetches multiple content blocks' do
       get "/v1/#{credential_pair.api_key}/content_blocks"
       expect(response).to have_http_status(200)

@@ -4,7 +4,7 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
   let!(:content_block) { create(:content_block) }
 
   context 'requesting a content block' do
-    describe 'GET batch_fetch' do
+    describe 'GET index' do
       def check_object(blocks, index, content_block)
         object = OpenStruct.new(blocks[index])
         expect(object.content).to eq(content_block.content)
@@ -16,7 +16,7 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
       it 'returns the right JSON content' do
         content_block2 = create(:content_block, api_key: content_block.api_key)
         content_block3 = create(:content_block, api_key: 'some-other-key')
-        get :batch_fetch, api_key: content_block.api_key
+        get :index, api_key: content_block.api_key
         expect(assigns(:content_blocks).size).to eq(2)
         expect(assigns(:content_blocks)).to include(content_block)
         expect(assigns(:content_blocks)).to include(content_block2)
