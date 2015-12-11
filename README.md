@@ -1,6 +1,10 @@
+[![Build Status](https://travis-ci.org/renuo/renuo-cms-api.svg?branch=master)](https://travis-ci.org/renuo/renuo-cms-api) [![Build Status](https://travis-ci.org/renuo/renuo-cms-api.svg?branch=develop)](https://travis-ci.org/renuo/renuo-cms-api) [![Code Climate](https://codeclimate.com/github/renuo/renuo-cms-api/badges/gpa.svg)](https://codeclimate.com/github/renuo/renuo-cms-api) [![Test Coverage](https://codeclimate.com/github/renuo/renuo-cms-api/badges/coverage.svg)](https://codeclimate.com/github/renuo/renuo-cms-api/coverage) [![Issue Count](https://codeclimate.com/github/renuo/renuo-cms-api/badges/issue_count.svg)](https://codeclimate.com/github/renuo/renuo-cms-api)
+
 # Renuo CMS API
 
-The soon-to-be central CMS of [Renuo](https://www.renuo.ch). Is a work in progress.
+The backend of the [Renuo](https://www.renuo.ch) CMS.
+ 
+Documented here https://renuo.gitbooks.io/renuo-cms-doc/content/
 
 ## API Documentation
 
@@ -10,22 +14,21 @@ See doc/README.md.
 
 ### Master
 
-https://renuo-cms-api-master.herokuapp.com
+[![Build Status](https://travis-ci.org/renuo/renuo-cms-api.svg?branch=master)](https://travis-ci.org/renuo/renuo-cms-api)
 
-[![build status](https://ci.renuo.ch/projects/38/status.png?ref=master)](https://ci.renuo.ch/projects/38?ref=master)
+https://renuo-cms-api-master.herokuapp.com
 
 ### Develop
 
-https://renuo-cms-api-develop.herokuapp.com
+[![Build Status](https://travis-ci.org/renuo/renuo-cms-api.svg?branch=develop)](https://travis-ci.org/renuo/renuo-cms-api)
 
-[![build status](https://ci.renuo.ch/projects/38/status.png?ref=develop)](https://ci.renuo.ch/projects/38?ref=develop)
+https://renuo-cms-api-develop.herokuapp.com
 
 ### Testing
 
+[![Build Status](https://travis-ci.org/renuo/renuo-cms-api.svg?branch=testing)](https://travis-ci.org/renuo/renuo-cms-api)
+
 https://renuo-cms-api-testing.herokuapp.com
-
-[![build status](https://ci.renuo.ch/projects/38/status.png?ref=testing)](https://ci.renuo.ch/projects/38?ref=testing)
-
 
 ## Installation
 
@@ -37,15 +40,12 @@ bin/setup
 
 ### Configuration
 
-Copy the database and application example-config files and fill out the missing values.
-Password and API-keys can be found in the Redmine Wiki.
-
-* config/database.yml
-* config/application.yml
-
 ```sh
 bin/setup
 ```
+
+* config/database.yml
+* config/application.yml
 
 ## Tests / Code Linting / Vulnerability Check
 
@@ -77,10 +77,6 @@ https://ci.renuo.ch/projects/38
 ```sh
 rails s -b renuo-cms-api.dev
 ```
-
-## Main Contributors
-
-![Nicolas Eckhart](https://www.gravatar.com/avatar/742cec893c283daf4a3c287ef2681599) ![Lukas Elmer](https://www.gravatar.com/avatar/697b8e2d3bde4d895eca4fe2dcfe9239.jpg)
 
 ## Copyright
 
