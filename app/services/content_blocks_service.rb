@@ -14,4 +14,9 @@ class ContentBlocksService
     content_block.update! content_block_params
     content_block
   end
+
+  # @return [Array<ContentBlock>]
+  def all
+    ContentBlock.where(api_key: @api_key).to_a
+  end
 end

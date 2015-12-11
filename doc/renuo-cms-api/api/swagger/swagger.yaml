@@ -90,7 +90,7 @@ paths:
           description: Unauthorized
 
     get:
-      summary: "[not yet implemented] Gets all Content Blocks"
+      summary: "Gets all Content Blocks"
       description: |
         The content blocks endpoint returns all content blocks given a public
         API key.
@@ -102,9 +102,8 @@ paths:
         '200':
           description: An array of all content blocks with the api_key
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/ContentBlock'
+            type: object
+            $ref: '#/definitions/ContentBlocks'
 
 definitions:
   StoreContentRequest:
@@ -124,6 +123,11 @@ definitions:
         description: |
           The identifier of the content. E.g. my-special-page. May
           also contain special characters like "/".
+  ContentBlocks:
+    name: content_blocks
+    type: array
+    items:
+      $ref: '#/definitions/ContentBlock'
   ContentBlock:
     type: object
     properties:

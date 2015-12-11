@@ -1,8 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe ContentBlocksService do
+  describe '#all' do
+    it 'returns an empty array when no records are found' do
+      content_blocks = ContentBlocksService.new('x3vs').all
+      expect(content_blocks).to eq([])
+    end
+
+    it 'returns an array of matching records' do
+      cb1 = create(:content_block, api_key: 'x3vs')
+      cb2 = create(:content_block, api_key: 'different')
+      cb3 = create(:content_block, api_key: 'x3vs')
+      content_blocks = ContentBlocksService.new('x3vs').all
+      expect(content_blocks.size).to eq(2)
+      expect(content_blocks).to include(cb1)
+      expect(content_blocks).not_to include(cb2)
+      expect(content_blocks).to include(cb3)
+    end
+  end
+
   describe '#find_or_initialize' do
-    it 'finds initializes a new content block' do
+    it 'initializes a new content block' do
       content_block = ContentBlocksService.new('x3vs').find_or_initialize('my-path')
       expect(content_block.new_record?).to be_truthy
       expect(content_block.content).to eq('')

@@ -4,6 +4,32 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
   let!(:content_block) { create(:content_block) }
 
   context 'requesting a content block' do
+    describe 'GET index' do
+      def check_object(blocks, index, content_block)
+        object = OpenStruct.new(blocks[index])
+        expect(object.content).to eq(content_block.content)
+        expect(object.content_path).to eq(content_block.content_path)
+        expect(object.api_key).to eq(content_block.api_key)
+        expect(object.id).to be_nil
+      end
+
+      it 'returns the right JSON content' do
+        content_block2 = create(:content_block, api_key: content_block.api_key)
+        content_block3 = create(:content_block, api_key: 'some-other-key')
+        get :index, api_key: content_block.api_key
+        expect(assigns(:content_blocks).size).to eq(2)
+        expect(assigns(:content_blocks)).to include(content_block)
+        expect(assigns(:content_blocks)).to include(content_block2)
+        expect(assigns(:content_blocks)).not_to include(content_block3)
+        expect(response).to have_http_status(:ok)
+
+        blocks = JSON.parse(response.body)['content_blocks']
+        expect(blocks.size).to eq(2)
+        check_object(blocks, 0, content_block)
+        check_object(blocks, 1, content_block2)
+      end
+    end
+
     describe 'GET fetch' do
       it 'checks whether the right JSON responds to a GET request to a show action' do
         get :fetch, api_key: content_block.api_key, content_path: content_block.content_path
@@ -14,6 +40,7 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
         expect(object.content).to eq(content_block.content)
         expect(object.content_path).to eq(content_block.content_path)
         expect(object.api_key).to eq(content_block.api_key)
+        expect(object.id).to be_nil
       end
 
       it 'renders return an empty content without corresponding resource' do

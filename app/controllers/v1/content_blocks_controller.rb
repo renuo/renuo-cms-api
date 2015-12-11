@@ -8,6 +8,11 @@ module V1
       render json: @content_block
     end
 
+    def index
+      @content_blocks = @content_blocks_service.all
+      render json: @content_blocks
+    end
+
     def store
       content_path = params[:content_block][:content_path]
       @content_block = @content_blocks_service.create_or_update(content_path, content_block_params)
