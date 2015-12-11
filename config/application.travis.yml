@@ -6,7 +6,7 @@ APP_PORT: '3000'
 SECRET_KEY_BASE: 'a608db91a6e6bda33fc2a8bb793231887760a45c8d2652a1088590b7dec5567ea03e350e9fe20cd3fd57b1ef376c55bdb6dacae8f04514a177379443a02184ae'
 
 # Newrelic
-NEW_RELIC_LICENSE_KEY: 'TODO'
+NEW_RELIC_LICENSE_KEY: '<insert key>'
 NEW_RELIC_APP_NAME: 'renuo-cms-api-travis'
 
 # Add 3 new projects for develop/master/testing at https://app.getsentry.com/organizations/renuo/projects/new/

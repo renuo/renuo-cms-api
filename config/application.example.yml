@@ -6,7 +6,7 @@ APP_PORT: '3000'
 SECRET_KEY_BASE: 'rake secret'
 
 # Newrelic
-NEW_RELIC_LICENSE_KEY: 'TODO'
+NEW_RELIC_LICENSE_KEY: '<insert key>'
 NEW_RELIC_APP_NAME: 'renuo-cms-api-<branch>'
 
 # Add 3 new projects for develop/master/testing at https://app.getsentry.com/organizations/renuo/projects/new/
