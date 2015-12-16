@@ -124,7 +124,6 @@ definitions:
           The identifier of the content. E.g. my-special-page. May
           also contain special characters like "/".
   ContentBlocks:
-    name: content_blocks
     type: array
     items:
       $ref: '#/definitions/ContentBlock'
