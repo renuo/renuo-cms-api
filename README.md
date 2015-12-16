@@ -3,12 +3,14 @@
 # Renuo CMS API
 
 The backend of the [Renuo](https://www.renuo.ch) CMS.
- 
+
 Documented here https://renuo.gitbooks.io/renuo-cms-doc/content/
 
 ## API Documentation
 
-See doc/README.md.
+http://petstore.swagger.io/?url=https://renuo-cms-api-develop.herokuapp.com/swagger.yml
+
+See doc/README.md to see how to edit the documentation.
 
 ## Domains
 

@@ -10,6 +10,10 @@ bin/setup
 
 to create the correct symlink.
 
+## Online Version
+
+http://petstore.swagger.io/?url=https://renuo-cms-api-develop.renuo.solutions/swagger.yml
+
 ## Install
 
 ```sh
