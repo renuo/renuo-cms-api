@@ -1,5 +1,15 @@
 # Swagger API Documentation
 
+## Hint
+
+Before you start, run
+
+```sh
+bin/setup
+```
+
+to create the correct symlink.
+
 ## Install
 
 ```sh
