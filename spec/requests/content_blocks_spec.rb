@@ -16,6 +16,7 @@ RSpec.describe 'ContentBlocks', type: :request do
   context '#index' do
     it 'fetches multiple content blocks' do
       get "/v1/#{credential_pair.api_key}/content_blocks"
+      expect(response.headers['Cache-Control']).to eq("max-age=#{5.minutes}, public")
       expect(response).to have_http_status(200)
       blocks = JSON.parse(response.body)['content_blocks']
       expect(blocks.size).to eq(1)
@@ -27,6 +28,7 @@ RSpec.describe 'ContentBlocks', type: :request do
   context '#fetch' do
     it 'fetches a content block' do
       get "/v1/#{credential_pair.api_key}/content_blocks/#{content_block.content_path}"
+      expect(response.headers['Cache-Control']).to eq('max-age=30, public')
       expect(response).to have_http_status(200)
       object = OpenStruct.new(JSON.parse(response.body)['content_block'])
       compare_content_blocks(object, content_block)
