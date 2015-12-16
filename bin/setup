@@ -22,6 +22,7 @@ Dir.chdir APP_ROOT do
   end
 
   run 'Symlinking swagger doc', 'doc/renuo-cms-api/api/swagger/swagger.yaml' do
+    system 'mkdir -p doc/renuo-cms-api/api/swagger'
     system 'ln -s ../../../../public/swagger.yml doc/renuo-cms-api/api/swagger/swagger.yaml'
   end
 
@@ -33,7 +34,10 @@ Dir.chdir APP_ROOT do
     system 'cp config/application.example.yml config/application.yml'
   end
 
-  run('Preparing database') { system 'bin/rake db:setup' }
+  run('Preparing database') do
+    system 'bin/rake db:version >> /dev/null 2>&1 || bin/rake db:setup'
+
+  end
 
   run 'Removing old logs and tempfiles' do
     system 'rm -f log/*'
