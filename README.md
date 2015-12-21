@@ -49,6 +49,14 @@ bin/setup
 * config/database.yml
 * config/application.yml
 
+## Rake Tasks
+
+Delete all content blocks: 
+
+```sh
+rake renuo_cms_api:delete_content_blocks
+```
+
 ## Tests / Code Linting / Vulnerability Check
 
 ### Everything
