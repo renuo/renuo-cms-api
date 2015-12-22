@@ -11,7 +11,7 @@ module V1
 
     def index
       @content_blocks = @content_blocks_service.all
-      expires_in 2.minutes, public: true, 's-maxage' => 10.minutes
+      expires_in 2.minutes, public: true, 's-maxage' => 4.minutes
       render json: @content_blocks
     end
 

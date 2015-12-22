@@ -16,7 +16,7 @@ RSpec.describe 'ContentBlocks', type: :request do
   context '#index' do
     it 'fetches multiple content blocks' do
       get "/v1/#{credential_pair.api_key}/content_blocks"
-      expect(response.headers['Cache-Control']).to eq("max-age=#{2.minutes}, public, s-maxage=#{10.minutes}")
+      expect(response.headers['Cache-Control']).to eq("max-age=#{2.minutes}, public, s-maxage=#{4.minutes}")
       expect(response).to have_http_status(200)
       blocks = JSON.parse(response.body)['content_blocks']
       expect(blocks.size).to eq(1)
