@@ -5,13 +5,13 @@ module V1
 
     def fetch
       @content_block = @content_blocks_service.find_or_initialize(params[:content_path])
-      expires_in 30.seconds, public: true, 's-maxage' => 30.seconds
+      expires_in 30.seconds, public: true, 's-maxage' => 1.minute
       render json: @content_block
     end
 
     def index
       @content_blocks = @content_blocks_service.all
-      expires_in 2.minutes, public: true, 's-maxage' => 2.minutes
+      expires_in 2.minutes, public: true, 's-maxage' => 10.minutes
       render json: @content_blocks
     end
 
