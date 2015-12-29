@@ -59,11 +59,11 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
     let!(:credential_pair) { create(:credential_pair, api_key: content_block.api_key) }
     let(:authorized_api_params) { { api_key: content_block.api_key, private_api_key: credential_pair.private_api_key } }
 
-    describe 'POST store' do
+    describe 'PUT store' do
       it 'creates a new block content' do
         expect do
           new_params = { content_block: { content: 'new content!', content_path: 'some-content-path' } }
-          post :store, authorized_api_params.merge(new_params)
+          put :store, authorized_api_params.merge(new_params)
         end.to change { ContentBlock.count }.by(1)
 
         expect(ContentBlock.last.content).to eq('new content!')
@@ -78,7 +78,7 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
           content: 'some-new-content'
         }
         expect do
-          post :store, authorized_api_params.merge(content_block: new_content_block)
+          put :store, authorized_api_params.merge(content_block: new_content_block)
         end.not_to change { ContentBlock.count }
 
         expect(response).to have_http_status(:ok)
@@ -88,14 +88,14 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
 
       it 'blocks when the private api key is non-existent' do
         unauthorized_api_params = { api_key: content_block.api_key, private_api_key: 'non-existent-private-api-key' }
-        post :store, unauthorized_api_params
+        put :store, unauthorized_api_params
         expect(assigns(:content_block)).to be_nil
         expect(response).to have_http_status(:unauthorized)
       end
 
       it 'does not find a resource' do
         invalid_authorized_api_params = { api_key: 'non-exist', private_api_key: credential_pair.private_api_key }
-        post :store, invalid_authorized_api_params
+        put :store, invalid_authorized_api_params
         expect(assigns(:content_block)).to be_nil
         expect(response).to have_http_status(:unauthorized)
       end
