@@ -10,6 +10,8 @@ module RenuoCmsApi
     config.api_only = true
     config.active_record.raise_in_transactional_callbacks = true
 
+    config.middleware.use Rack::MethodOverride
+
     config.middleware.insert_before 0, 'Rack::Cors', logger: (-> { Rails.logger }) do
       allow do
         origins '*'
