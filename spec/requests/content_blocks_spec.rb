@@ -37,13 +37,13 @@ RSpec.describe 'ContentBlocks', type: :request do
 
   context '#store' do
     it 'updates a content block' do
-      post "/v1/#{credential_pair.api_key}/content_blocks",
-           private_api_key: credential_pair.private_api_key,
-           content_block: {
-             content: 'new content',
-             content_path: content_block.content_path,
-             api_key: credential_pair.api_key
-           }
+      put "/v1/#{credential_pair.api_key}/content_blocks",
+          private_api_key: credential_pair.private_api_key,
+          content_block: {
+            content: 'new content',
+            content_path: content_block.content_path,
+            api_key: credential_pair.api_key
+          }
       expect(response).to have_http_status(200)
       object = OpenStruct.new(JSON.parse(response.body)['content_block'])
       expect(object.content_path).to eq(content_block.content_path)
@@ -56,13 +56,13 @@ RSpec.describe 'ContentBlocks', type: :request do
     end
 
     it 'creates a content block' do
-      post "/v1/#{credential_pair.api_key}/content_blocks",
-           private_api_key: credential_pair.private_api_key,
-           content_block: {
-             content: 'bla content',
-             content_path: 'blub-path',
-             api_key: credential_pair.api_key
-           }
+      put "/v1/#{credential_pair.api_key}/content_blocks",
+          private_api_key: credential_pair.private_api_key,
+          content_block: {
+            content: 'bla content',
+            content_path: 'blub-path',
+            api_key: credential_pair.api_key
+          }
       expect(response).to have_http_status(200)
       object = OpenStruct.new(JSON.parse(response.body)['content_block'])
       expect(object.content_path).to eq('blub-path')
