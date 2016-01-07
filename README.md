@@ -18,19 +18,19 @@ See doc/README.md to see how to edit the documentation.
 
 [![Build Status](https://travis-ci.org/renuo/renuo-cms-api.svg?branch=master)](https://travis-ci.org/renuo/renuo-cms-api)
 
-https://renuo-cms-api-master.herokuapp.com
+https://renuo-cms-api-master.renuo.solutions
 
 ### Develop
 
 [![Build Status](https://travis-ci.org/renuo/renuo-cms-api.svg?branch=develop)](https://travis-ci.org/renuo/renuo-cms-api)
 
-https://renuo-cms-api-develop.herokuapp.com
+https://renuo-cms-api-develop.renuo.solutions
 
 ### Testing
 
 [![Build Status](https://travis-ci.org/renuo/renuo-cms-api.svg?branch=testing)](https://travis-ci.org/renuo/renuo-cms-api)
 
-https://renuo-cms-api-testing.herokuapp.com
+https://renuo-cms-api-testing.renuo.solutions
 
 ## Installation
 
