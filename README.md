@@ -91,4 +91,4 @@ rails s -b renuo-cms-api.dev
 
 ## Copyright
 
-Coypright 2015 [Renuo GmbH](https://www.renuo.ch/).
+Coypright 2016 [Renuo GmbH](https://www.renuo.ch/).
