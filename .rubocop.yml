@@ -15,11 +15,15 @@ AllCops:
     - '**/Rakefile'
     - '**/config.ru'
   Exclude:
+    - 'vendor/**/*'
     - 'bin/**/*'
     - 'script/**/*'
     - 'log/**/*'
     - 'public/**/*'
     - 'tmp/**/*'
-    - 'config/unicorn.rb'
     - 'db/**/*'
-    # - 'spec/**/*'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'spec/controllers/**/*'
+    - 'spec/requests/**/*'

@@ -1,98 +1,94 @@
+[![Build Status](https://travis-ci.org/renuo/renuo-cms-api.svg?branch=master)](https://travis-ci.org/renuo/renuo-cms-api) [![Build Status](https://travis-ci.org/renuo/renuo-cms-api.svg?branch=develop)](https://travis-ci.org/renuo/renuo-cms-api) [![Code Climate](https://codeclimate.com/github/renuo/renuo-cms-api/badges/gpa.svg)](https://codeclimate.com/github/renuo/renuo-cms-api) [![Test Coverage](https://codeclimate.com/github/renuo/renuo-cms-api/badges/coverage.svg)](https://codeclimate.com/github/renuo/renuo-cms-api/coverage) [![Issue Count](https://codeclimate.com/github/renuo/renuo-cms-api/badges/issue_count.svg)](https://codeclimate.com/github/renuo/renuo-cms-api)
+
 # Renuo CMS API
 
-The soon-to-be central CMS of Renuo LLC. Is a work in progress.
+The backend of the [Renuo](https://www.renuo.ch) CMS.
+
+Documented here https://renuo.gitbooks.io/renuo-cms-doc/content/
+
+## API Documentation
+
+http://petstore.swagger.io/?url=https://renuo-cms-api-develop.herokuapp.com/swagger.yml
+
+See doc/README.md to see how to edit the documentation.
 
 ## Domains
 
 ### Master
 
-https://renuo-cms-api-master.herokuapp.com
+[![Build Status](https://travis-ci.org/renuo/renuo-cms-api.svg?branch=master)](https://travis-ci.org/renuo/renuo-cms-api)
 
-[![build status](https://ci.renuo.ch/projects/38/status.png?ref=master)](https://ci.renuo.ch/projects/38?ref=master)
+https://renuo-cms-api-master.renuo.solutions
 
 ### Develop
 
-https://renuo-cms-api-develop.herokuapp.com
+[![Build Status](https://travis-ci.org/renuo/renuo-cms-api.svg?branch=develop)](https://travis-ci.org/renuo/renuo-cms-api)
 
-[![build status](https://ci.renuo.ch/projects/38/status.png?ref=develop)](https://ci.renuo.ch/projects/38?ref=develop)
+https://renuo-cms-api-develop.renuo.solutions
 
 ### Testing
 
-https://renuo-cms-api-testing.herokuapp.com
+[![Build Status](https://travis-ci.org/renuo/renuo-cms-api.svg?branch=testing)](https://travis-ci.org/renuo/renuo-cms-api)
 
-[![build status](https://ci.renuo.ch/projects/38/status.png?ref=testing)](https://ci.renuo.ch/projects/38?ref=testing)
-
-## Ruby on Rails
-
-This application requires:
-
-- Ruby 2.2.1
-- Rails 4.2.1
+https://renuo-cms-api-testing.renuo.solutions
 
 ## Installation
 
 ```sh
-git clone git@git.renuo.ch:renuo/renuo-cms-api.git
+git clone git@github.com:renuo/renuo-cms-api.git
 cd renuo-cms-api
-bundle install
+bin/setup
 ```
 
-## Configuration
-
-Copy the database and application example-config files and fill out the missing values.
-Password and API-keys can be found in the Redmine Wiki.
+### Configuration
 
 ```sh
-cp config/database.example.yml config/database.yml
-cp config/application.example.yml config/application.yml
+bin/setup
 ```
 
-## Database
+* config/database.yml
+* config/application.yml
 
-Setup the database for the development environment:
+## Rake Tasks
+
+Delete all content blocks: 
 
 ```sh
-bundle exec rake db:drop db:setup
+rake renuo_cms_api:delete_content_blocks
 ```
 
-## Tests
+## Tests / Code Linting / Vulnerability Check
 
-### Run Tests
-
-```sh
-rspec
-```
-
-### CI
-
-https://ci.renuo.ch/projects/38
-
-### Code Linting / Vulnerability Check
-
-Rubocop is used to lint the ruby code while Brakeman is used to check for security vulnerabilities.
-They are both run in a pre-commit git hook to insure code quality. If you need to make changes to
-the Rubocop configuration edit the .rubocop.yml file (configuration here: https://github.com/bbatsov/rubocop#configuration)
-
-If you want to add other tools to the pre-commit hook, edit the script at .git/hooks/pre-commit.
-
-If you want to run the tools manually, you can do so with the following command:
+### Everything
 
 ```sh
 bin/check
 ```
 
-## Run
+This runs
+
+* rspec
+* rubocop
+* brakeman
+
+### Rspec Only
 
 ```sh
-bundle exec rails s
+rspec
 ```
 
-## Problems?
+### CI & Code Quality
 
-Nicolas Eckhart is currently working on this application.
+* https://travis-ci.org/renuo/renuo-cms-api
+* https://codeclimate.com/github/renuo/renuo-cms-api
 
-![Nicolas Eckhart](http://www.gravatar.com/avatar/742cec893c283daf4a3c287ef2681599)
+
+## Server
+
+```sh
+rails s -b renuo-cms-api.dev
+```
 
 ## Copyright
 
-Coypright 2015 [Renuo GmbH](https://www.renuo.ch/).
+Coypright 2016 [Renuo GmbH](https://www.renuo.ch/).

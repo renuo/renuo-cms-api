@@ -9,3 +9,4 @@
 /config/application.yml
 /db/*.sqlite3
 /db/*.sqlite3-journal
+/doc/renuo-cms-api/api/swagger/swagger.yaml

@@ -1,3 +1,5 @@
+require_relative 'code_climate'
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
@@ -16,6 +18,8 @@ RSpec.configure do |config|
   config.profile_examples = 5
 
   config.order = :random
+
+  config.seed = Date.today.to_s
 
   Kernel.srand config.seed
 end

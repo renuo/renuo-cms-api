@@ -1,34 +1,38 @@
 source 'https://rubygems.org'
+
 ruby File.read('.ruby-version').strip
 
-gem 'rails'
+# instead of rails, use only rails-api and friends
+# this will change when rails 5 is out, since rails-api will be included in rails
+gem 'bundler'
+gem 'activerecord'
+gem 'activesupport'
 gem 'rails-api'
+gem 'active_model_serializers'
+
 gem 'pg'
 gem 'figaro'
-gem 'rails-i18n'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-timeout'
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'letter_opener'
-  gem 'brakeman', require: false
 end
 
 group :development, :test do
+  gem 'brakeman', require: false
   gem 'rubocop'
   gem 'byebug'
-  gem 'quiet_assets'
   gem 'faker'
 end
 
 group :test do
   gem 'rspec-rails'
-  gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'simplecov'
+  gem "codeclimate-test-reporter", require: nil
 end
 
 group :production do
