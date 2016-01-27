@@ -6,6 +6,10 @@ Rails.application.routes.draw do
         get action: :index
         get '/*content_path' => 'content_blocks#fetch'
       end
+
+      scope '/renuo_upload_credentials', controller: :renuo_upload_credentials do
+        get action: :index
+      end
     end
   end
 
