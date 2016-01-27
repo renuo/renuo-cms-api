@@ -1,5 +1,7 @@
 module V1
   class ContentBlocksController < ApplicationController
+    include VerificationCheck
+
     before_action :verify_key_pair, only: [:store]
     before_action :initialize_service
 
@@ -30,11 +32,6 @@ module V1
 
     def content_block_params
       params.require(:content_block).permit(:content)
-    end
-
-    def verify_key_pair
-      pair_exists = CredentialPair.exists?(private_api_key: params[:private_api_key], api_key: params[:api_key])
-      head :unauthorized unless pair_exists
     end
   end
 end
