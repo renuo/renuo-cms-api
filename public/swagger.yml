@@ -117,7 +117,7 @@ paths:
         - Upload
       responses:
         '200':
-          description: The upload credential with the given renuo_upload_api_key and the renuo_upload_signing_url
+          description: The upload credentials with the given renuo_upload_api_key and the renuo_upload_signing_url
           schema:
             $ref: '#/definitions/RenuoUploadCredentials'
             
