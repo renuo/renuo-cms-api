@@ -6,8 +6,8 @@ RSpec.describe CredentialPair, type: :model do
     expect(credential_pair.api_key).to be_truthy
     expect(credential_pair.private_api_key).to be_truthy
     expect(credential_pair.project_name).to start_with('project-')
-    expect(credential_pair.renuo_upload_api_key).to eq('')
-    expect(credential_pair.renuo_upload_signing_url).to eq('')
+    expect(credential_pair.renuo_upload_api_key).to eq('87VJCHauQZuTyY92JOjy0c6tW')
+    expect(credential_pair.renuo_upload_signing_url).to eq('https://some.host')
   end
 
   it 'validates the credential pair project name' do
