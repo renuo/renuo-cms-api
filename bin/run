@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+source ~/.zshrc
+
+rails s -b renuo-cms-api.dev
