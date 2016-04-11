@@ -9,7 +9,7 @@ RSpec.describe 'routes for ContentBlocks', type: :routing do
 
   it 'routes the create requests via PUT' do
     expected = basic_expected.merge(action: 'store')
-    expect(put: "#{api_base_path}").to route_to(expected)
+    expect(put: api_base_path.to_s).to route_to(expected)
   end
 
   it 'routes the get requests via GET' do
@@ -19,7 +19,7 @@ RSpec.describe 'routes for ContentBlocks', type: :routing do
 
   it 'routes the batch get requests via GET' do
     expected = basic_expected.merge(action: 'index')
-    expect(get: "#{api_base_path}").to route_to(expected)
+    expect(get: api_base_path.to_s).to route_to(expected)
   end
 
   it 'does not route the update requests via PATCH' do
