@@ -2,4 +2,4 @@
 
 source ~/.zshrc
 
-rails s -b renuo-cms-api.dev
+rails s -b renuo-cms-api.dev -p 3002
