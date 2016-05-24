@@ -7,9 +7,9 @@ RSpec.describe 'routes for ContentBlocks', type: :routing do
     { controller: 'v1/content_blocks', api_key: 'sOmE4piK1', format: 'json' }
   end
 
-  it 'routes the create requests via POST' do
+  it 'routes the create requests via PUT' do
     expected = basic_expected.merge(action: 'store')
-    expect(post: "#{api_base_path}").to route_to(expected)
+    expect(put: api_base_path.to_s).to route_to(expected)
   end
 
   it 'routes the get requests via GET' do
@@ -19,7 +19,7 @@ RSpec.describe 'routes for ContentBlocks', type: :routing do
 
   it 'routes the batch get requests via GET' do
     expected = basic_expected.merge(action: 'index')
-    expect(get: "#{api_base_path}").to route_to(expected)
+    expect(get: api_base_path.to_s).to route_to(expected)
   end
 
   it 'does not route the update requests via PATCH' do
@@ -28,6 +28,10 @@ RSpec.describe 'routes for ContentBlocks', type: :routing do
 
   it 'does not route the DELETE requests' do
     expect(delete: "#{api_base_path}/sample/path").not_to be_routable
+  end
+
+  it 'does not route the "wrong" PUT request' do
+    expect(put: "#{api_base_path}/sample/path").not_to be_routable
   end
 
   it 'does not route the "wrong" POST request' do

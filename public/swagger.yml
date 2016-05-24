@@ -105,6 +105,22 @@ paths:
             type: object
             $ref: '#/definitions/ContentBlocks'
 
+  /{api_key}/renuo_upload_credentials:
+    get:
+      summary: Gets the credentials of renuo upload
+      description: |
+        The renuo upload credentials endpoint returns the renuo upload key and the signing url by the private api key of the CMS
+      parameters:
+        - $ref: "#/parameters/api_key"
+        - $ref: "#/parameters/private_api_key"
+      tags:
+        - Upload
+      responses:
+        '200':
+          description: The upload credentials with the given renuo_upload_api_key and the renuo_upload_signing_url
+          schema:
+            $ref: '#/definitions/RenuoUploadCredentials'
+            
 definitions:
   StoreContentRequest:
     type: object
@@ -163,3 +179,14 @@ definitions:
         type: string
         format: date-time
         description: The time of the last update.
+  RenuoUploadCredentials:
+    type: object
+    properties:
+      signing_url:
+        type: string
+        description: |
+          The url needed for signing. Please see https://renuo.gitbooks.io/renuo-upload-doc/content/index.html
+      api_key:
+        type: string
+        description: |
+          The api_key needed for signing and uploading. Please see https://renuo.gitbooks.io/renuo-upload-doc/content/index.html
