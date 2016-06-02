@@ -23,6 +23,16 @@ RSpec.describe 'ContentBlocks', type: :request do
       object = OpenStruct.new(blocks[0])
       compare_content_blocks(object, content_block)
     end
+
+    it 'fetches empty content blocks array if no content blocks are in the database' do
+      empty_credential_pair = create(:credential_pair, :empty)
+      get "/v1/#{empty_credential_pair.api_key}/content_blocks"
+      expect(response.headers['Cache-Control']).to eq("max-age=#{2.minutes}, public, s-maxage=#{2.minutes}")
+      expect(response).to have_http_status(200)
+      response_json = JSON.parse(response.body)
+      expect(response_json).to have_key('content_blocks')
+      expect(response_json['content_blocks']).to eq([])
+    end
   end
 
   context '#fetch' do
