@@ -14,7 +14,7 @@ module V1
     def index
       @content_blocks = @content_blocks_service.all
       expires_in 2.minutes, public: true, 's-maxage' => 2.minutes
-      render json: @content_blocks, each_serializer: V1::ContentBlockSerializer, adapter: :json
+      render json: @content_blocks, each_serializer: V1::ContentBlockSerializer, adapter: :json, root: 'content_blocks'
     end
 
     def store
