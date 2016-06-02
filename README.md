@@ -89,6 +89,15 @@ rspec
 rails s -b renuo-cms-api.dev
 ```
 
+## Release
+
+* Check current version, chose new version according to http://semver.org/
+* ```git fetch --all && git co master && git pull && git co develop && git pull```
+* ```git flow release start x.x.x```
+* Review the code since last version
+* ```git flow release finish x.x.x```
+* ```git push --tags && git co master && git push && git co develop && git push```
+
 ## Copyright
 
 Coypright 2016 [Renuo GmbH](https://www.renuo.ch/).
