@@ -14,6 +14,7 @@ gem 'pg'
 gem 'figaro'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-timeout'
+gem 'paper_trail'
 
 group :development do
   gem 'better_errors'
