@@ -17,8 +17,8 @@ info:
     * JSON
     * etc.
 
-    Currently, it's the developers decision and responsability to chose and
-    render the correct format. In other words: Shit in, Shit out.
+    Currently, it's the developers decision and responsability to choose and
+    render the correct format. In other words: Shit in, shit out.
 
   version: 1.0.0
 host: renuo-cms-api-testing.herokuapp.com
@@ -120,7 +120,7 @@ paths:
           description: The upload credentials with the given renuo_upload_api_key and the renuo_upload_signing_url
           schema:
             $ref: '#/definitions/RenuoUploadCredentials'
-            
+
 definitions:
   StoreContentRequest:
     type: object
