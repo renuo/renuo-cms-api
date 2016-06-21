@@ -19,4 +19,14 @@ class ContentBlocksService
   def all
     ContentBlock.where(api_key: @api_key).to_a
   end
+
+  # @return [String]
+  def unhashed_etag
+    "#{@api_key}#{last_modified_at}"
+  end
+
+  # @return [TimeWithZone]
+  def last_modified_at
+    ContentBlock.where(api_key: @api_key).maximum(:updated_at)
+  end
 end
