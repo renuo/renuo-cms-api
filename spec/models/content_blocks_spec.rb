@@ -27,4 +27,8 @@ RSpec.describe ContentBlock, type: :model do
     5.times { create(:content_block) }
     expect(ContentBlock.count).to eq(5)
   end
+
+  it 'implements PaperTrail' do
+    expect(ContentBlock.paper_trail_enabled_for_model?).to be true
+  end
 end
