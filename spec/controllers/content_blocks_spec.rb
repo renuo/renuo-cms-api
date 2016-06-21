@@ -13,24 +13,32 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
     request.env['HTTP_IF_MODIFIED_SINCE'] = last_modified
   end
 
+  def compare_content_block(expected_content_block, raw_content_block)
+    content_block = OpenStruct.new(raw_content_block)
+
+    expect(content_block.content).to eq(expected_content_block.content)
+    expect(content_block.content_path).to eq(expected_content_block.content_path)
+    expect(content_block.api_key).to eq(expected_content_block.api_key)
+    expect(content_block.id).to be_nil
+  end
   context 'requesting a content block' do
     describe 'GET index' do
+      before(:all) do
+        Rails.cache.clear
+      end
+
       def check_object(blocks, index, content_block)
-        object = OpenStruct.new(blocks[index])
-        expect(object.content).to eq(content_block.content)
-        expect(object.content_path).to eq(content_block.content_path)
-        expect(object.api_key).to eq(content_block.api_key)
-        expect(object.id).to be_nil
+        compare_content_block(content_block, blocks[index])
       end
 
       it 'returns the right JSON content' do
         content_block2 = create(:content_block, api_key: content_block.api_key)
-        content_block3 = create(:content_block, api_key: 'some-other-key')
+        create(:content_block, api_key: 'some-other-key')
         get :index, api_key: content_block.api_key
-        expect(assigns(:content_blocks).size).to eq(2)
-        expect(assigns(:content_blocks)).to include(content_block)
-        expect(assigns(:content_blocks)).to include(content_block2)
-        expect(assigns(:content_blocks)).not_to include(content_block3)
+        content_blocks = assigns(:content_blocks_json)['content_blocks']
+        expect(content_blocks.size).to eq(2)
+        compare_content_block(content_block, content_blocks[0])
+        compare_content_block(content_block2, content_blocks[1])
         expect(response).to have_http_status(:ok)
 
         blocks = JSON.parse(response.body)['content_blocks']
@@ -94,11 +102,8 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
         expect(assigns(:content_block)).to eq(content_block)
         expect(assigns(:content_block).created_at).to be_within(5.seconds).of(content_block.created_at)
         expect(response).to have_http_status(:ok)
-        object = OpenStruct.new(JSON.parse(response.body)['content_block'])
-        expect(object.content).to eq(content_block.content)
-        expect(object.content_path).to eq(content_block.content_path)
-        expect(object.api_key).to eq(content_block.api_key)
-        expect(object.id).to be_nil
+        object = JSON.parse(response.body)['content_block']
+        compare_content_block(content_block, object)
       end
 
       it 'renders return an empty content without corresponding resource' do
