@@ -82,11 +82,11 @@ RSpec.describe ContentBlocksService do
     it 'returns the last modified content_block of the given api_key' do
       content_block_service = ContentBlocksService.new('x3vs')
       expect(content_block_service.unhashed_etag).to eq(['x3vs', nil])
-      create(:content_block, api_key: 'different', updated_at: Date.today)
-      expect(content_block_service.unhashed_etag).to eq(['x3vs', nil])
-      cb1 = create(:content_block, api_key: 'x3vs', updated_at: 2.days.ago)
+      cb1 = create(:content_block, :updated_last_week, api_key: 'x3vs')
       expect(content_block_service.unhashed_etag).to eq(['x3vs', cb1.updated_at])
-      cb2 = create(:content_block, api_key: 'x3vs', updated_at: Date.yesterday)
+      create(:content_block, :updated_today, api_key: 'different')
+      expect(content_block_service.unhashed_etag).to eq(['x3vs', cb1.updated_at])
+      cb2 = create(:content_block, :updated_yesterday, api_key: 'x3vs')
       expect(content_block_service.unhashed_etag).to eq(['x3vs', cb2.updated_at])
     end
   end
