@@ -4,7 +4,7 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
   let!(:content_block) { create(:content_block) }
 
   context 'requesting a content block' do
-    def content_blocks_equal?(expected_content_block, raw_content_block)
+    def expect_content_blocks_to_be_equal(expected_content_block, raw_content_block)
       content_block = OpenStruct.new(raw_content_block)
       expect(content_block.content).to eq(expected_content_block.content)
       expect(content_block.content_path).to eq(expected_content_block.content_path)
@@ -21,30 +21,35 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
         get :index, api_key: content_block.api_key
         content_blocks = JSON.parse(assigns(:content_blocks_json))['content_blocks']
         expect(content_blocks.size).to eq(2)
-        content_blocks_equal?(content_block, content_blocks[0])
-        content_blocks_equal?(content_block2, content_blocks[1])
+        expect_content_blocks_to_be_equal(content_block, content_blocks[0])
+        expect_content_blocks_to_be_equal(content_block2, content_blocks[1])
         expect(response).to have_http_status(:ok)
 
         blocks = JSON.parse(response.body)['content_blocks']
         expect(blocks.size).to eq(2)
-        content_blocks_equal?(content_block, blocks[0])
-        content_blocks_equal?(content_block2, blocks[1])
+        expect_content_blocks_to_be_equal(content_block, blocks[0])
+        expect_content_blocks_to_be_equal(content_block2, blocks[1])
       end
 
       it 'uses the http cache with etag' do
-        get :index, api_key: content_block.api_key
-        expect(response).to have_http_status 200
-        etag = response.headers['ETag']
-        expect(etag).to be_truthy
-        request.env['HTTP_IF_NONE_MATCH'] = etag
-        get :index, api_key: content_block.api_key
-        expect(response).to have_http_status 304
+        def expect_status_code_accessed_with_etag(etag, http_status_code)
+          request.env['HTTP_IF_NONE_MATCH'] = etag if etag
+          get :index, api_key: content_block.api_key
+          expect(response).to have_http_status http_status_code
+          etag = response.headers['ETag']
+          expect(etag).to be_truthy
+          etag
+        end
+
+        etag = expect_status_code_accessed_with_etag(nil, 200)
+        etag = expect_status_code_accessed_with_etag(etag, 304)
         create(:content_block, updated_at: 3.days.since, api_key: 'anotherAPIKey')
-        get :index, api_key: content_block.api_key
-        expect(response).to have_http_status 304
+        etag = expect_status_code_accessed_with_etag(etag, 304)
         create(:content_block, updated_at: 3.days.since, api_key: content_block.api_key)
-        get :index, api_key: content_block.api_key
-        expect(response).to have_http_status 200
+        etag = expect_status_code_accessed_with_etag(etag, 200)
+        etag = expect_status_code_accessed_with_etag(etag, 304)
+        content_block.update(updated_at: 10.days.since)
+        expect_status_code_accessed_with_etag(etag, 200)
       end
     end
 
@@ -55,7 +60,7 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
         expect(assigns(:content_block).created_at).to be_within(5.seconds).of(content_block.created_at)
         expect(response).to have_http_status(:ok)
         object = JSON.parse(response.body)['content_block']
-        content_blocks_equal?(content_block, object)
+        expect_content_blocks_to_be_equal(content_block, object)
       end
 
       it 'renders return an empty content without corresponding resource' do
