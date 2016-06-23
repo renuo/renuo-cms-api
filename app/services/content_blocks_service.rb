@@ -20,10 +20,12 @@ class ContentBlocksService
     ContentBlock.where(api_key: @api_key).to_a
   end
 
-  # @return [String]
+  # @return [Array]
   def unhashed_etag
-    "#{@api_key}#{last_modified_at}"
+    [@api_key, last_modified_at]
   end
+
+  private
 
   # @return [TimeWithZone]
   def last_modified_at
