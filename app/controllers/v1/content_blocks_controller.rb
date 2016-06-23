@@ -28,10 +28,10 @@ module V1
     private
 
     def serialized_content_blocks
-      Rails.cache.fetch(@content_blocks_service.unhashed_etag, expires_in: 12.hours) do
+      Rails.cache.fetch(@content_blocks_service.unhashed_etag, expires_in: 30.days) do
         options = { serializer: V1::ContentBlockSerializer, root: 'content_blocks' }
         serializer = ActiveModel::Serializer::CollectionSerializer.new(@content_blocks_service.all, options)
-        ActiveModelSerializers::Adapter::Json.new(serializer).serializable_hash.to_json
+        ActiveModelSerializers::Adapter::Json.new(serializer).to_json
       end
     end
 
