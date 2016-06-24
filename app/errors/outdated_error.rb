@@ -1,0 +1,2 @@
+class OutdatedError < RuntimeError
+end

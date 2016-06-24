@@ -76,5 +76,24 @@ RSpec.describe ContentBlocksService do
         expect(content_block.content).to eq('Z')
       end.not_to change { ContentBlock.count }
     end
+
+    context 'race condition' do
+      subject { ContentBlocksService.new('x3vs') }
+      it 'throws an exception' do
+        block = create(:content_block, content_path: 'path_xy', api_key: 'x3vs')
+        outated_version = block.version
+
+        block.update(content: 'I update the block, before you do. Muahahaha!')
+        latest_version = block.version
+
+        expect do
+          subject.create_or_update('path_xy', { content: 'desired new content' }, outated_version)
+        end.to raise_error(OutdatedError)
+
+        expect do
+          subject.create_or_update('path_xy', { content: 'desired new content' }, latest_version)
+        end.not_to raise_exception
+      end
+    end
   end
 end

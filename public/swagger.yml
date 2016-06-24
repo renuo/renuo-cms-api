@@ -86,6 +86,11 @@ paths:
           description: The new or updated content block
           schema:
             $ref: '#/definitions/ContentBlock'
+        '409':
+          description: Conflict. Returned when the content block has been
+            updated by another party in the meantime, i.e. the version number
+            provided in the content_block does not match the latest version on
+            the server.
         default:
           description: Unauthorized
 
@@ -139,6 +144,10 @@ definitions:
         description: |
           The identifier of the content. E.g. my-special-page. May
           also contain special characters like "/".
+      version:
+        type: integer
+        description: The version upon which the block is based.
+    required: ['content', 'content_path']
   ContentBlocks:
     type: array
     items:
@@ -171,6 +180,10 @@ definitions:
           * 8 characters = (26*2+10)^8 ~= 10^14
           * 12 characters = (26*2+10)^8 ~= 10^21
           * 16 characters = (26*2+10)^8 ~= 10^28
+      version:
+        type: integer
+        description: |
+          The version of the content block. The version is increased by 1 everytime the block is updated on the server.
       created_at:
         type: string
         format: date-time

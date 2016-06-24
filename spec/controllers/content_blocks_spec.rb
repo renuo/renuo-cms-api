@@ -58,6 +58,11 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
   context 'changing a content block' do
     let!(:credential_pair) { create(:credential_pair, api_key: content_block.api_key) }
     let(:authorized_api_params) { { api_key: content_block.api_key, private_api_key: credential_pair.private_api_key } }
+    let(:content_block_params) do
+      { content_block: { content_path: content_block.content_path, api_key: content_block.api_key,
+                         content: content_block.content } }
+    end
+    let(:merged_params) { authorized_api_params.merge content_block_params }
 
     describe 'PUT store' do
       it 'creates a new block content' do
@@ -98,6 +103,24 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
         put :store, invalid_authorized_api_params
         expect(assigns(:content_block)).to be_nil
         expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'stores the block when the predecessor version matches the latest version of the block' do
+        params = merged_params
+        params[:content_block][:version] = content_block.version
+        put :store, params
+        expect(assigns(:content_block)).to eq(content_block)
+        expect(response).to have_http_status(:success)
+      end
+
+      it 'raises an error 409 when the predecessor version is outdated' do
+        outdated_version = content_block.version
+        content_block.update(content: 'I update the block, before you do. Muahahaha!')
+        params = merged_params
+        params[:content_block][:version] = outdated_version
+        put :store, params
+        expect(assigns(:content_block)).to be_nil
+        expect(response).to have_http_status(409)
       end
     end
   end
