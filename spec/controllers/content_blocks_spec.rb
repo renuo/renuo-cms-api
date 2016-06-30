@@ -43,13 +43,20 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
 
         etag = expect_status_code_accessed_with_etag(nil, 200)
         etag = expect_status_code_accessed_with_etag(etag, 304)
-        create(:content_block, updated_at: 3.days.since, api_key: 'anotherAPIKey')
+
+        Timecop.travel 1.day.since
+        create(:content_block, api_key: 'anotherAPIKey')
         etag = expect_status_code_accessed_with_etag(etag, 304)
-        create(:content_block, updated_at: 3.days.since, api_key: content_block.api_key)
+
+        Timecop.travel 1.day.since
+        create(:content_block, api_key: content_block.api_key)
         etag = expect_status_code_accessed_with_etag(etag, 200)
         etag = expect_status_code_accessed_with_etag(etag, 304)
-        content_block.update(updated_at: 10.days.since)
-        expect_status_code_accessed_with_etag(etag, 200)
+
+        Timecop.travel 1.day.since
+        content_block.update(content: 'foooo')
+        etag = expect_status_code_accessed_with_etag(etag, 200)
+        expect_status_code_accessed_with_etag(etag, 304)
       end
     end
 
