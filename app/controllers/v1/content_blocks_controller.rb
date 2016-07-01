@@ -20,7 +20,10 @@ module V1
     end
 
     def store
-      content_path = params[:content_block][:content_path]
+      block_params = params[:content_block]
+      content_path = block_params[:content_path]
+      predecessor_version = block_params[:version].try(:to_i)
+      return head 409 if @content_blocks_service.outdated?(content_path, predecessor_version)
       @content_block = @content_blocks_service.create_or_update(content_path, content_block_params)
       render json: @content_block, serializer: V1::ContentBlockSerializer, adapter: :json
     end

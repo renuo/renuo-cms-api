@@ -56,6 +56,32 @@ RSpec.describe ContentBlocksService do
     end
   end
 
+  describe '#outdated?' do
+    subject { ContentBlocksService.new('cbs_outdated_test') }
+
+    outdated_version = nil
+    latest_version = nil
+
+    before(:each) do
+      block = create(:content_block, content_path: 'path_xy', api_key: 'cbs_outdated_test')
+      outdated_version = block.version
+      block.update(content: 'New version')
+      latest_version = block.version
+    end
+
+    it 'returns true, if the given version does not match the latest version' do
+      expect(subject.outdated?('path_xy', outdated_version)).to eq(true)
+    end
+
+    it 'returns false, if the given version matches the latest version' do
+      expect(subject.outdated?('path_xy', latest_version)).to eq(false)
+    end
+
+    it 'returns false, if no version is given' do
+      expect(subject.outdated?('path_xy', nil)).to eq(false)
+    end
+  end
+
   describe '#create_or_update' do
     it 'creates a new content block' do
       expect do
@@ -79,15 +105,30 @@ RSpec.describe ContentBlocksService do
   end
 
   describe '#unhashed_etag' do
+    def create_block_at(time, api_key)
+      Timecop.freeze time do
+        create(:content_block, api_key: api_key)
+      end
+    end
+
     it 'returns the last modified content_block of the given api_key' do
+      # Rounding necessary because Ruby Time is more precise than DB time
+      # See http://blog.solanolabs.com/rails-time-comparisons-devil-details-etc/
+      last_week = 1.week.ago.round(6)
+      today = 1.hour.ago.round(6)
+      yesterday = 1.day.ago.round(6)
+
       content_block_service = ContentBlocksService.new('x3vs')
       expect(content_block_service.unhashed_etag).to eq(['x3vs', nil])
-      cb1 = create(:content_block, :updated_last_week, api_key: 'x3vs')
-      expect(content_block_service.unhashed_etag).to eq(['x3vs', cb1.updated_at])
-      create(:content_block, :updated_today, api_key: 'different')
-      expect(content_block_service.unhashed_etag).to eq(['x3vs', cb1.updated_at])
-      cb2 = create(:content_block, :updated_yesterday, api_key: 'x3vs')
-      expect(content_block_service.unhashed_etag).to eq(['x3vs', cb2.updated_at])
+
+      create_block_at(last_week, 'x3vs')
+      expect(content_block_service.unhashed_etag).to eq(['x3vs', last_week])
+
+      create_block_at(today, 'different')
+      expect(content_block_service.unhashed_etag).to eq(['x3vs', last_week])
+
+      create_block_at(yesterday, 'x3vs')
+      expect(content_block_service.unhashed_etag).to eq(['x3vs', yesterday])
     end
   end
 end
