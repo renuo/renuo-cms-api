@@ -56,6 +56,32 @@ RSpec.describe ContentBlocksService do
     end
   end
 
+  describe '#outdated?' do
+    subject { ContentBlocksService.new('cbs_outdated_test') }
+
+    outdated_version = nil
+    latest_version = nil
+
+    before(:each) do
+      block = create(:content_block, content_path: 'path_xy', api_key: 'cbs_outdated_test')
+      outdated_version = block.version
+      block.update(content: 'New version')
+      latest_version = block.version
+    end
+
+    it 'returns true, if the given version does not match the latest version' do
+      expect(subject.outdated?('path_xy', outdated_version)).to eq(true)
+    end
+
+    it 'returns false, if the given version matches the latest version' do
+      expect(subject.outdated?('path_xy', latest_version)).to eq(false)
+    end
+
+    it 'returns false, if no version is given' do
+      expect(subject.outdated?('path_xy', nil)).to eq(false)
+    end
+  end
+
   describe '#create_or_update' do
     it 'creates a new content block' do
       expect do
@@ -75,25 +101,6 @@ RSpec.describe ContentBlocksService do
         expect(content_block.content_path).to eq(existing.content_path)
         expect(content_block.content).to eq('Z')
       end.not_to change { ContentBlock.count }
-    end
-
-    context 'race condition' do
-      subject { ContentBlocksService.new('x3vs') }
-      it 'throws an exception' do
-        block = create(:content_block, content_path: 'path_xy', api_key: 'x3vs')
-        outated_version = block.version
-
-        block.update(content: 'I update the block, before you do. Muahahaha!')
-        latest_version = block.version
-
-        expect do
-          subject.create_or_update('path_xy', { content: 'desired new content' }, outated_version)
-        end.to raise_error(OutdatedError)
-
-        expect do
-          subject.create_or_update('path_xy', { content: 'desired new content' }, latest_version)
-        end.not_to raise_exception
-      end
     end
   end
 

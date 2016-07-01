@@ -8,10 +8,15 @@ class ContentBlocksService
     ContentBlock.find_or_initialize_by api_key: @api_key, content_path: content_path
   end
 
-  # @return [ContentBlock]
-  def create_or_update(content_path, content_block_params, predecessor_version = nil)
+  def outdated?(content_path, version = nil)
+    return false if version.nil?
     content_block = find_or_initialize content_path
-    raise OutdatedError if predecessor_version && predecessor_version != content_block.version
+    version != content_block.version
+  end
+
+  # @return [ContentBlock]
+  def create_or_update(content_path, content_block_params)
+    content_block = find_or_initialize content_path
     content_block.update! content_block_params
     content_block
   end

@@ -1,2 +1,0 @@
-class OutdatedError < RuntimeError
-end

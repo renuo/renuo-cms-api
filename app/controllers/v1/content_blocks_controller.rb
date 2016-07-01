@@ -22,13 +22,9 @@ module V1
     def store
       block_params = params[:content_block]
       content_path = block_params[:content_path]
-      predecessor_version = block_params[:version] ? block_params[:version].to_i : nil
-      begin
-        @content_block = @content_blocks_service.create_or_update(content_path, content_block_params,
-                                                                  predecessor_version)
-      rescue OutdatedError
-        return head 409
-      end
+      predecessor_version = block_params[:version].try(:to_i)
+      return head 409 if @content_blocks_service.outdated?(content_path, predecessor_version)
+      @content_block = @content_blocks_service.create_or_update(content_path, content_block_params)
       render json: @content_block, serializer: V1::ContentBlockSerializer, adapter: :json
     end
 

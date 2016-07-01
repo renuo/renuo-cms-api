@@ -140,7 +140,7 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
         expect(response).to have_http_status(:success)
       end
 
-      it 'raises an error 409 when the predecessor version is outdated' do
+      it 'returns status code 409 when the predecessor version is outdated' do
         outdated_version = content_block.version
         content_block.update(content: 'I update the block, before you do. Muahahaha!')
         params = merged_params
