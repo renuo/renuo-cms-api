@@ -14,6 +14,7 @@ gem 'pg'
 gem 'figaro'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rack-timeout'
+gem 'paper_trail'
 
 group :development do
   gem 'better_errors'
@@ -32,6 +33,7 @@ group :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'simplecov'
+  gem 'timecop'
   gem "codeclimate-test-reporter", require: nil
 end
 
