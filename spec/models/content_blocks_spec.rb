@@ -30,7 +30,7 @@ RSpec.describe ContentBlock, type: :model do
   end
 
   it 'implements PaperTrail' do
-    expect(ContentBlock.paper_trail_enabled_for_model?).to be true
+    expect(ContentBlock.paper_trail.enabled?).to be true
   end
 
   describe '#version' do
@@ -46,9 +46,9 @@ RSpec.describe ContentBlock, type: :model do
     end
 
     it 'returns 0, if there are no paper trail versions of the block yet' do
-      ContentBlock.paper_trail_off!
+      ContentBlock.paper_trail.disable
       block = create(:content_block, content: 'version created before Paper Trail was enabled')
-      ContentBlock.paper_trail_on!
+      ContentBlock.paper_trail.enable
       expect(block.version).to eq 0
 
       block.update(content: 'version 1 (now with paper trail)')
