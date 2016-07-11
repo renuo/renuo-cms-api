@@ -8,6 +8,7 @@ gem 'bundler'
 gem 'activerecord'
 gem 'activesupport'
 gem 'rails-api'
+gem 'railties', '< 5'
 gem 'active_model_serializers'
 
 gem 'pg'
@@ -34,7 +35,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'simplecov'
   gem 'timecop'
-  gem "codeclimate-test-reporter", require: nil
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 group :production do

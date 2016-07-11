@@ -182,6 +182,7 @@ DEPENDENCIES
   rack-timeout
   rails-api
   rails_12factor
+  railties (< 5)
   rspec-rails
   rubocop
   sentry-raven
