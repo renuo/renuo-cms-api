@@ -14,8 +14,6 @@ RSpec.describe V1::ContentBlocksController, type: :controller do
     end
 
     describe 'GET index' do
-      before(:each) { Rails.cache.clear }
-
       it 'returns the right JSON content' do
         content_block2 = create(:content_block, api_key: content_block.api_key)
         create(:content_block, api_key: 'some-other-key')
