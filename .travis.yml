@@ -2,8 +2,6 @@ language: ruby
 cache:
   bundler: true
   apt: true
-directories:
-  - tmp/cache
 addons:
   code_climate:
     repo_token: a318ed48e37de491dda0591e741a8bc1fb8421f9a7592e4e44eb1133ed183a2d
@@ -19,4 +17,5 @@ before_script:
     - cp config/database.travis.yml config/database.yml
     - cp config/application.travis.yml config/application.yml
     - cp spec/code_climate.travis.rb spec/code_climate.rb
+    - mkdir -p tmp/cache
 script: bin/check
