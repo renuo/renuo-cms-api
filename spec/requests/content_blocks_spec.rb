@@ -15,6 +15,8 @@ RSpec.describe 'ContentBlocks', type: :request do
   end
 
   context '#index' do
+    before(:each) { Rails.cache.clear }
+
     it 'fetches multiple content blocks' do
       get "/v1/#{credential_pair.api_key}/content_blocks"
       expect(response.headers['Cache-Control']).to eq("max-age=#{2.minutes}, public, s-maxage=#{2.minutes}")
