@@ -86,7 +86,7 @@ rspec
 ## Server
 
 ```sh
-rails s -b renuo-cms-api.dev
+bin/run
 ```
 
 ## Release
