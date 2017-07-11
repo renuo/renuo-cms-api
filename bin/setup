@@ -46,10 +46,4 @@ Dir.chdir APP_ROOT do
   run 'Creating pre-commit hook link', '.git/hooks/pre-commit' do
     system 'ln -s ../../bin/check .git/hooks/pre-commit'
   end
-
-  run('Setting dev host in /etc/hosts') do
-    system 'grep \'renuo-cms-api.dev\' /etc/hosts || echo \'127.0.0.1 renuo-cms-api.dev\' | sudo tee -a /etc/hosts'
-  end
-
-  run('Running checks') { system 'bin/check' }
 end
