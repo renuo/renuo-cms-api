@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ContentBlocksService
   def initialize(api_key)
     @api_key = api_key
